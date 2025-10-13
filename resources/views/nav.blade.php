@@ -13,7 +13,7 @@
         <nav>
             <a href="/">Home</a> |
             <a href="/product">Product</a> |
-            <a href="/profile">Profile</a>
+            <a href="/contact">Contact</a>
         </nav>
     </header>
 
