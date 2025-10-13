@@ -21,7 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'location',
+        'location', //i tambahin ini biar gk usa bikin kek file orng baru gt
     ];
 
     /**

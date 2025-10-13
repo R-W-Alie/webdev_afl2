@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Our Products</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/navigation.css') }}">
 </head>
 
 <body>
@@ -33,7 +32,7 @@
                             </p>
                             <div class="mt-auto">
                                 <p class="fw-semibold text-dark mb-0" style="font-size: 0.95rem;">
-                                    Rp{{ number_format($product->price, 0, ',', '.') }}
+                                    Rp {{ number_format($product->price, 0, ',', '.') }}
                                 </p>
                             </div>
                         </div>

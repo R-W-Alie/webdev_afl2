@@ -21,6 +21,4 @@
         <p class="small" style="color: #a0a0a0;">© 2025 Kel & Co. All rights reserved.</p>
     </div>
 </footer>
-
-<!-- Font Awesome -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>

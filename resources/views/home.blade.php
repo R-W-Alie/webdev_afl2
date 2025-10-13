@@ -7,13 +7,10 @@
     <title> aku lupa namanya apa </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('css/navigation.css') }}">
 </head>
 
 <body>
     @include('layout.nav')
-
-    {{-- Hero Carousel --}}
     <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active"
@@ -40,8 +37,7 @@
                 </div>
             </div>
         </div>
-
-        {{-- Indicators --}}
+        
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"
                 aria-current="true"></button>
@@ -49,7 +45,6 @@
             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
         </div>
 
-        {{-- Controls --}}
         <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon"></span>
         </button>

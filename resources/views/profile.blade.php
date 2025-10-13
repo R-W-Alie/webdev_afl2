@@ -5,12 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Profile</title>
-
-    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Navigation CSS -->
-    <link rel="stylesheet" href="{{ asset('css/navigation.css') }}">
 </head>
 
 <body>
@@ -22,7 +17,7 @@
             <div class="col-md-7 col-lg-6">
                 <div class="card border-0 shadow-sm rounded-4" style="background-color: #faf7f2;">
                     <div class="card-body text-center py-5 px-4">
-                        <!-- Initial circle instead of profile photo -->
+                        
                         <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-4"
                             style="width: 90px; height: 90px; background-color: #e5d5b5; color: #fff; font-size: 2rem; font-weight: 500;">
                             {{ strtoupper(substr($user->name, 0, 1)) }}

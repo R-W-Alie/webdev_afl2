@@ -9,10 +9,8 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        // For now, just take the first user (dummy profile)
-        $user = User::first();
+        $user = User::first();//ambil data user kesatu for sementara
 
-        // send it to the view
         return view('profile', compact('user'));
     }
 }

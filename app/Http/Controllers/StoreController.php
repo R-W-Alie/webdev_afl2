@@ -9,7 +9,7 @@ class StoreController extends Controller
 {
     public function index()
     {
-        $stores = Store::all(); // ambil all stores
+        $stores = Store::all();
         return view('store', compact('stores'));
     }
     
