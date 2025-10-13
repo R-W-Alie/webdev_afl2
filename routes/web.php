@@ -2,17 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\ProductController;
+
+Route::get('/product', [ProductController::class, 'index'])->name('products.index');
+
 
 Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/product', function () {
-    return view('product');
-});
-
-Route::get(' /store', [StoreController::class, 'index'])->name('stores');
-
-// Route::get('/Store', function () {
-//     return view('store');
-// });
+Route::get('/store', [StoreController::class, 'index'])->name('store.index');

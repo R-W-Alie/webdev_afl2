@@ -19,8 +19,8 @@
             <div class="carousel-item active"
                 style="background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600&h=900&fit=crop'); background-size: cover; background-position: center; height: 85vh;">
                 <div class="carousel-caption text-start d-none d-md-block">
-                    <h1 class="display-4 fw-light text-white">Timeless Elegance</h1>
-                    <p class="lead">Discover our new collection</p>
+                    <h1 class="display-4 fw-light text-black">Timeless Elegance</h1>
+                    <p class=" text-black">Discover our new collection</p>
                 </div>
             </div>
 
@@ -28,7 +28,7 @@
                 style="background-image: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1600&h=900&fit=crop'); background-size: cover; background-position: center; height: 85vh;">
                 <div class="carousel-caption text-start d-none d-md-block">
                     <h1 class="display-4 fw-light text-white">Refined Luxury</h1>
-                    <p class="lead">Crafted with precision and care</p>
+                    <p>Crafted with precision and care</p>
                 </div>
             </div>
 
@@ -36,7 +36,7 @@
                 style="background-image: url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1600&h=900&fit=crop'); background-size: cover; background-position: center; height: 85vh;">
                 <div class="carousel-caption text-start d-none d-md-block">
                     <h1 class="display-4 fw-light text-white">Modern Sophistication</h1>
-                    <p class="lead">Where style meets comfort</p>
+                    <p>Where style meets comfort</p>
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <p class="lead text-muted text-center">
-                    At <strong>Timeless</strong>, we believe elegance is not just a look — it's an experience.
+                    At <strong>Kel & Co</strong>, we believe elegance is not just a look — it's an experience.
                     Our passion lies in curating collections that blend classic sophistication with modern design,
                     allowing you to express your individuality with confidence and grace.
                 </p>

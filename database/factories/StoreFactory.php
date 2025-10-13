@@ -17,7 +17,10 @@ class StoreFactory extends Factory
     public function definition(): array
     {
         return [
-            //
-        ];
+            'name' => $this->faker->company(),
+            'image' => 'https://picsum.photos/400?random='.$this->faker->unique()->numberBetween(1, 50),
+            'description' => $this->faker->sentence(10),
+            'location' => $this->faker->city(),
+        ];  
     }
 }

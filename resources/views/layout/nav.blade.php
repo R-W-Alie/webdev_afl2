@@ -7,6 +7,7 @@
             <a href="/">Home</a>
             <a href="/product">Product</a>
             <a href="/store">Store</a>
+            <a href="/profile">Profile</a>
         </div>
     </div>
 </nav>
