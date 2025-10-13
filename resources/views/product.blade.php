@@ -1,89 +1,88 @@
-{{-- @extends('nav')
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title> aku lupa namanya apa </title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ asset('css/navigation.css') }}">
+    </head>
+    <style>
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 60%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
 
-@section('title', 'product')
+        .slide.active {
+            opacity: 1;
+        }
 
-@section('content')
-    <h1>Our Products</h1>
-    <p>Explore our latest collections and style inspirations.</p>
-@endsection --}}
+        .slide-content {
+            position: absolute;
+            bottom: 10%;
+            left: 5%;
+            color: #ffffff;
+            z-index: 10;
+            max-width: 600px;
+        }
 
-@php
-    use App\Models\Product;
+        .slide-content h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
 
-    $products = Product::all();
-    $product = $products[0]; // tampilkan produk pertama
-    $recommended = collect($products)->where('id', '!=', $product['id'])->take(3);
-@endphp
-@extends('nav')
-@section('title', $product['name'] . ' — Votre')
-@section('content')
-<link rel="stylesheet" href="{{ asset('css/product.css') }}">
-<div class="max-w-7xl mx-auto px-6 py-16">
+        .slide-content p {
+            font-size: 1.1rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
 
-    {{-- Product Section --}}
-    <div class="grid md:grid-cols-2 gap-14">
-        {{-- Left: Product Images --}}
-        <div class="space-y-4">
-            <img src="{{ asset($product['main_image']) }}" alt="{{ $product['name'] }}" 
-                class="w-full rounded-2xl shadow-sm object-cover">
+        .slide-indicators {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+        }
 
-            <div class="grid grid-cols-4 gap-3">
-                @foreach ($product['gallery'] as $img)
-                    <img src="{{ asset($img) }}" 
-                        class="rounded-xl hover:opacity-80 cursor-pointer transition duration-200">
-                @endforeach
-            </div>
-        </div>
+        .indicator {
+            width: 40px;
+            height: 2px;
+            background-color: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
-        {{-- Right: Info --}}
-        <div>
-            <h1 class="text-3xl font-semibold mb-3 tracking-tight">{{ $product['name'] }}</h1>
-            <p class="text-lg text-gray-700 mb-6 font-light">
-                Rp {{ number_format($product['price'], 0, ',', '.') }}
-            </p>
+        .indicator.active {
+            background-color: rgba(255,255,255,1);
+        }
 
-            <p class="text-gray-600 leading-relaxed mb-8">
-                {{ $product['description'] }}
-            </p>
+        .overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3));
+            z-index: 5;
+        }
 
-            {{-- Size Selector --}}
-            <div class="mb-8">
-                <label class="block text-gray-700 mb-2 font-medium">Select Size</label>
-                <div class="flex gap-3">
-                    @foreach(['S','M','L','XL'] as $size)
-                        <button class="border border-gray-300 rounded-full px-4 py-2 text-sm hover:bg-gray-900 hover:text-white transition">
-                            {{ $size }}
-                        </button>
-                    @endforeach
-                </div>
-            </div>
-
-            {{-- Add to Cart (non-functional) --}}
-            <button class="w-full bg-gray-900 text-white py-3 rounded-full text-sm uppercase tracking-wide hover:bg-gray-700 transition">
-                Add to Cart
-            </button>
-        </div>
-    </div>
-
-    {{-- Recommended --}}
-    <div class="mt-20">
-        <h2 class="text-xl font-semibold mb-8">You may also like</h2>
-        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-            @foreach($recommended as $item)
-                <div class="group">
-                    <div class="overflow-hidden rounded-2xl bg-gray-50">
-                        <img src="{{ asset($item['main_image']) }}" 
-                            class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300">
-                    </div>
-                    <h3 class="mt-3 text-sm font-medium text-gray-800 group-hover:text-gray-600">
-                        {{ $item['name'] }}
-                    </h3>
-                    <p class="text-gray-500 text-sm">
-                        Rp {{ number_format($item['price'], 0, ',', '.') }}
-                    </p>
-                </div>
-            @endforeach
-        </div>
-    </div>
-</div>
-@endsection
+        @media (max-width: 768px) {
+            .slide-content h1 {
+                font-size: 2rem;
+            }
+            
+            .slide-content p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</html>
