@@ -12,4 +12,5 @@ class StoreController extends Controller
         $stores = Store::all(); // ambil all stores
         return view('store', compact('stores'));
     }
+    
 }

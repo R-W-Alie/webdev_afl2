@@ -15,4 +15,9 @@ class Product extends Model
         'price',
         'image',
     ];
+
+    public function stores()
+    {
+        return $this->belongsToMany(Store::class, 'product_store');
+    }
 }

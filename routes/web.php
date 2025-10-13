@@ -6,7 +6,6 @@ use App\Http\Controllers\ProductController;
 
 Route::get('/product', [ProductController::class, 'index'])->name('products.index');
 
-
 Route::get('/', function () {
     return view('home');
 });
