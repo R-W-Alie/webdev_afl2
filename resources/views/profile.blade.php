@@ -19,32 +19,33 @@
 
     <div class="container my-5">
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card shadow-lg border-0" style="border-radius: 15px; overflow: hidden;">
-                    <div class="row g-0 align-items-center">
-                        <!-- Profile Picture (Left Side) -->
-                        <div class="col-md-4 text-center  p-4">
-                            <img src="https://i.pravatar.cc/200?img={{ $user->id }}" alt="Profile Photo"
-                                class="rounded-circle mb-3 img-fluid"
-                                style="width: 150px; height: 150px; object-fit: cover;">
+            <div class="col-md-7 col-lg-6">
+                <div class="card border-0 shadow-sm rounded-4" style="background-color: #faf7f2;">
+                    <div class="card-body text-center py-5 px-4">
+                        <!-- Initial circle instead of profile photo -->
+                        <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-4"
+                            style="width: 90px; height: 90px; background-color: #e5d5b5; color: #fff; font-size: 2rem; font-weight: 500;">
+                            {{ strtoupper(substr($user->name, 0, 1)) }}
                         </div>
 
-                        <!-- User Info (Right Side) -->
-                        <div class="col-md-8">
-                            <div class="card-body p-4">
-                                <h3 class="fw-light mb-1">{{ $user->name }}</h3>
-                                <p class="text-muted mb-2">{{ $user->email }}</p>
-                                <p class="text-secondary mb-3">
-                                    <i class="fa-solid fa-location-dot me-2"></i>{{ $user->location ?? 'Unknown' }}
-                                </p>
-                                <p class="text-muted small mb-0">Member since {{ $user->created_at->format('F Y') }}</p>
-                            </div>
-                        </div>
+                        <h3 class="fw-light text-secondary mb-1">{{ $user->name }}</h3>
+                        <p class="text-muted mb-3">{{ $user->email }}</p>
+
+                        <div class="mx-auto mb-3" style="width: 60px; height: 2px; background-color: #bfa97a;"></div>
+
+                        <p class="text-secondary mb-1">
+                            <i class="bi bi-geo-alt me-2"></i>{{ $user->location ?? 'Unknown Location' }}
+                        </p>
+                        <p class="text-muted small">
+                            Member since {{ $user->created_at->format('F Y') }}
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
     @include('layout.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
