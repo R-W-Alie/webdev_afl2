@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
+
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 
 Route::get('/product', [ProductController::class, 'index'])->name('products.index');
 
