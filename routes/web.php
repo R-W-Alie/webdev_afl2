@@ -11,7 +11,7 @@ Route::get('/product', function () {
     return view('product');
 });
 
-Route::get(' /stores', [StoreController::class, 'index'])->name('stores');
+Route::get(' /store', [StoreController::class, 'index'])->name('stores');
 
 // Route::get('/Store', function () {
 //     return view('store');
