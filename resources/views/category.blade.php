@@ -1,6 +1,6 @@
-@extends('nav')
+@extends('layout.nav')
 
-@section('title', 'Contact')
+@section('title', 'category')
 
 @section('content')
     <h1>This is me</h1>

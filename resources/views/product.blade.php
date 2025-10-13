@@ -85,4 +85,7 @@
             }
         }
     </style>
+    <body>
+    @include("layout.nav")
+    </body>
 </html>
