@@ -24,3 +24,7 @@
     </div>
   </div>
 </nav>
+
+{{-- ini bukan layout so we have to study layout --}}
+{{-- hrsnya ada yield --}}
+{{--  --}}
