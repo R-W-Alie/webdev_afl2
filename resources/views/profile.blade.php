@@ -1,49 +1,153 @@
-<!doctype html>
-<html lang="en">
+@extends('layout.main')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Profile</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+@section('title', 'Profile - Kel & Co')
 
-<body>
-    @include('layout.nav')
+@section('styles')
+<style>
+    .profile-section {
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+        padding: 80px 0;
+    }
 
+    .profile-card {
+        background-color: white;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease;
+        max-width: 500px;
+        margin: 0 auto;
+    }
 
-    <div class="container my-5">
+    .profile-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+
+    .profile-avatar {
+        width: 110px;
+        height: 110px;
+        background: linear-gradient(135deg, #C9B8A3 0%, #8B7355 100%);
+        color: white;
+        font-size: 2.5rem;
+        font-weight: 300;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 15px rgba(139, 115, 85, 0.2);
+        margin-bottom: 1.5rem;
+    }
+
+    .profile-name {
+        font-size: 2rem;
+        font-weight: 300;
+        letter-spacing: 0.05em;
+        color: #2C2416;
+        margin-bottom: 0.5rem;
+    }
+
+    .profile-email {
+        font-size: 1rem;
+        color: #5C4D3C;
+        letter-spacing: 0.03em;
+        margin-bottom: 0;
+    }
+
+    .profile-divider {
+        width: 60px;
+        height: 1px;
+        background-color: #8B7355;
+        margin: 1.5rem auto;
+    }
+
+    .profile-info-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        font-size: 0.95rem;
+        color: #5C4D3C;
+        letter-spacing: 0.02em;
+        margin-bottom: 0.75rem;
+    }
+
+    .profile-info-item i {
+        color: #8B7355;
+        font-size: 1rem;
+    }
+
+    .profile-meta {
+        font-size: 0.85rem;
+        color: #8B7355;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+    }
+
+    .edit-profile-btn {
+        background-color: #2C2416;
+        border: 1px solid #2C2416;
+        color: white;
+        padding: 12px 35px;
+        font-size: 0.85rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+        font-weight: 300;
+        border-radius: 6px;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .edit-profile-btn:hover {
+        background-color: #8B7355;
+        border-color: #8B7355;
+        color: white;
+    }
+</style>
+@endsection
+
+@section('content')
+<div class="profile-section">
+    <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-7 col-lg-6">
-                <div class="card border-0 shadow-sm rounded-4" style="background-color: #faf7f2;">
-                    <div class="card-body text-center py-5 px-4">
-                        
-                        <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-4"
-                            style="width: 90px; height: 90px; background-color: #e5d5b5; color: #fff; font-size: 2rem; font-weight: 500;">
+            <div class="col-12">
+                <div class="profile-card p-5">
+                    <div class="text-center">
+                        <!-- pfp -->
+                        <div class="profile-avatar">
                             {{ strtoupper(substr($user->name, 0, 1)) }}
                         </div>
 
-                        <h3 class="fw-light text-secondary mb-1">{{ $user->name }}</h3>
-                        <p class="text-muted mb-3">{{ $user->email }}</p>
+                        <!-- name -->
+                        <h3 class="profile-name">{{ $user->name }}</h3>
+                        
+                        <!-- email -->
+                        <p class="profile-email">{{ $user->email }}</p>
 
-                        <div class="mx-auto mb-3" style="width: 60px; height: 2px; background-color: #bfa97a;"></div>
+                        <!-- divider -->
+                        <div class="profile-divider"></div>
 
-                        <p class="text-secondary mb-1">
-                            <i class="bi bi-geo-alt me-2"></i>{{ $user->location ?? 'Unknown Location' }}
-                        </p>
-                        <p class="text-muted small">
+                        <!-- location -->
+                        <div class="profile-info-item">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span>{{ $user->location ?? 'Location not set' }}</span>
+                        </div>
+
+                        <!-- since when -->
+                        <p class="profile-meta mb-4">
                             Member since {{ $user->created_at->format('F Y') }}
                         </p>
+
+                        <!-- edit -->
+                        <a href="#" class="edit-profile-btn mt-2">
+                            Edit Profile
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-    @include('layout.footer')
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+</div>
+@endsection

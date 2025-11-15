@@ -1,46 +1,98 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Our Stores</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  </head>
+@extends('layout.main')
 
-  <body>
-    @include('layout.nav')
+@section('title', 'Our Stores - Kel & Co')
 
-    <div class="container my-5 py-4">
-      <div class="text-center mb-5">
-        <h1 class="fw-light" style="letter-spacing: 0.03em;">Our Stores</h1>
-        <div class="mx-auto" style="width: 60px; height: 2px; background-color: #000;"></div>
-      </div>
+@section('styles')
+<style>
+    .store-title {
+        font-size: 2.5rem;
+        font-weight: 300;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #2C2416;
+    }
 
-      <div class="row g-4">
-        @foreach ($stores as $store)
-          <div class="col-md-6 col-lg-4">
-            <div class="card border-0 shadow-sm h-100" style="border-radius: 12px; overflow: hidden;">
-              <img src="{{ $store->image }}" class="card-img-top" alt="{{ $store->name }}" style="height: 230px; object-fit: cover;">
-              
-              <div class="card-body d-flex flex-column">
-                <h5 class="card-title fw-semibold mb-2">{{ $store->name }}</h5>
-                <p class="card-text text-muted mb-3" style="font-size: 0.9rem;">
-                  {{ $store->description }}
-                </p>
-                <div class="mt-auto">
-                  <p class="text-secondary mb-0" style="font-size: 0.85rem;">
-                    <i class="fa-solid fa-location-dot me-1"></i> {{ $store->location }}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        @endforeach
-      </div>
+    .store-divider {
+        width: 80px;
+        height: 1px;
+        background-color: #8B7355;
+        margin: 0 auto;
+    }
+
+    .store-card {
+        border-radius: 12px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background-color: white;
+    }
+
+    .store-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.12) !important;
+    }
+
+    .store-card img {
+        height: 280px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .store-card:hover img {
+        transform: scale(1.05);
+    }
+
+    .store-name {
+        font-weight: 400;
+        letter-spacing: 0.05em;
+        color: #2C2416;
+    }
+
+    .store-description {
+        font-size: 0.9rem;
+        color: #5C4D3C;
+        line-height: 1.6;
+    }
+
+    .store-location {
+        font-size: 0.85rem;
+        color: #8B7355;
+        letter-spacing: 0.03em;
+    }
+
+    .store-location i {
+        color: #8B7355;
+    }
+</style>
+@endsection
+
+@section('content')
+<div class="container my-5 py-5">
+    <div class="text-center mb-5">
+        <h1 class="store-title mb-4">Our Stores</h1>
+        <div class="store-divider"></div>
     </div>
-    @include('layout.footer')
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
-</html>
+    <div class="row g-4">
+        @foreach ($stores as $store)
+        <div class="col-md-6 col-lg-4">
+            <div class="card store-card border-0 shadow-sm h-100">
+                <div style="overflow: hidden;">
+                    <img src="{{ $store->image }}" class="card-img-top" alt="{{ $store->name }}">
+                </div>
+                <div class="card-body d-flex flex-column">
+                    <h5 class="store-name mb-2">{{ $store->name }}</h5>
+                    <p class="store-description mb-3">
+                        {{ $store->description }}
+                    </p>
+                    <div class="mt-auto">
+                        <p class="store-location mb-0">
+                            <i class="fa-solid fa-location-dot me-2"></i>{{ $store->location }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</div>
+@endsection
