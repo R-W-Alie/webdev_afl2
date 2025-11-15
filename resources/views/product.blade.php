@@ -1,49 +1,99 @@
-<!doctype html>
-<html lang="en">
+@extends('layout.main')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Our Products</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+@section('title', 'Our Products - Kel & Co')
 
-<body>
-    @include('layout.nav')
+@section('styles')
+<style>
+    .product-title {
+        font-size: 2.5rem;
+        font-weight: 300;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #2C2416;
+    }
 
-    <div class="container my-5 py-4">
-        <div class="text-center mb-5">
-            <h1 class="fw-light" style="letter-spacing: 0.03em;">Our Products</h1>
-            <div class="mx-auto" style="width: 60px; height: 2px; background-color: #000;"></div>
-        </div>
+    .product-divider {
+        width: 80px;
+        height: 1px;
+        background-color: #8B7355;
+        margin: 0 auto;
+    }
 
+    .product-card {
+        border-radius: 12px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        background-color: white;
+    }
 
-        <div class="row g-4">
-            @foreach ($products as $product)
-                <div class="col-md-6 col-lg-4">
-                    <div class="card border-0 shadow-sm h-100" style="border-radius: 12px; overflow: hidden;">
-                        <img src="{{ $product->image }}" class="card-img-top" alt="{{ $product->name }}"
-                            style="height: 230px; object-fit: cover;">
+    .product-card:hover {
+        transform: translateY(-5px);
+    }
 
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title fw-semibold mb-2">{{ $product->name }}</h5>
-                            <p class="card-text text-muted mb-3" style="font-size: 0.9rem;">
-                                {{ $product->description }}
-                            </p>
-                            <div class="mt-auto">
-                                <p class="fw-semibold text-dark mb-0" style="font-size: 0.95rem;">
-                                    Rp {{ number_format($product->price, 0, ',', '.') }}
-                                </p>
-                            </div>
-                        </div>
+    .product-card img {
+        height: 280px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .product-card:hover img {
+        transform: scale(1.05);
+    }
+
+    .product-name {
+        font-weight: 400;
+        letter-spacing: 0.05em;
+        color: #2C2416;
+    }
+
+    .product-description {
+        font-size: 0.9rem;
+        color: #5C4D3C;
+        line-height: 1.6;
+    }
+
+    .product-price {
+        font-weight: 400;
+        color: #8B7355;
+        letter-spacing: 0.05em;
+    }
+</style>
+@endsection
+
+@section('content')
+<div class="container my-5 py-5">
+    <div class="text-center mb-5">
+        <h1 class="product-title mb-4">Our Products</h1>
+        <div class="product-divider"></div>
+    </div>
+
+    <div class="row g-4">
+        @foreach ($products as $product)
+        <div class="col-md-6 col-lg-4">
+            <div class="card product-card border-0 shadow-sm h-100">
+                <div style="overflow: hidden;">
+                    <img src="{{ $product->image }}" class="card-img-top" alt="{{ $product->name }}">
+                </div>
+                <div class="card-body d-flex flex-column">
+                    <h5 class="product-name mb-2">{{ $product->name }}</h5>
+                    <p class="product-description mb-3">
+                        {{ $product->description }}
+                    </p>
+                    <div class="mt-auto">
+                        <p class="product-price mb-0">
+                            Rp {{ number_format($product->price, 0, ',', '.') }}
+                        </p>
                     </div>
                 </div>
-            @endforeach
+            </div>
         </div>
+        @endforeach
     </div>
-    @include('layout.footer')
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+    @if($products->hasPages())
+    <div class="mt-5">
+        {{ $products->links('pagination::bootstrap-5') }}
+    </div>
+    @endif
+</div>
+@endsection

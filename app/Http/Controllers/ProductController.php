@@ -7,9 +7,18 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::all();
+        $search = $request->input('search');
+        
+        $products = Product::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('name', 'like', "%{$search}%")
+                            ->orWhere('description', 'like', "%{$search}%");
+            })
+            ->paginate(9)
+            ->appends(['search' => $search]);
+        
         return view('product', compact('products'));
     }
 

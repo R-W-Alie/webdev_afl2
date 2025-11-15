@@ -66,8 +66,8 @@
         }
 
         .kc-footer {
-            background-color: #E8DCC8;
-            border-top: 1px solid #D4C4B0;
+            background-color: #eae1d2;
+            /* border-top: 1px solid #D4C4B0; */
         }
 
         .kc-footer-brand {
@@ -106,7 +106,7 @@
             height: 38px;
             border: 1px solid #C9B8A3;
             border-radius: 50%;
-            color: #5C4D3C !important;
+            color: #5C4D3C;
             text-decoration: none;
             transition: all 0.3s ease;
         }
