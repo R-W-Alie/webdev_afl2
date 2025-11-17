@@ -1,44 +1,20 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\StoreController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Middleware\AdminMiddleware;
-use Illuminate\Support\Facades\Auth;
-
-
-
-Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-
-Route::get('/product', [ProductController::class, 'index'])->name('products.index');
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 });
 
-Route::get('/store', [StoreController::class, 'index'])->name('store.index');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware([AdminMiddleware::class])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        dd(get_class(Auth::user()));
-        return 'ADMIN PAGE';
-    });
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
-
-Route::post('/login', function (Illuminate\Http\Request $request) {
-    $credentials = $request->only('email', 'password');
-
-    if (Auth::attempt($credentials)) {
-        $request->session()->regenerate();
-        return redirect('/admin/dashboard');
-    }
-
-    return back()->withErrors([
-        'email' => 'Wrong email or password',
-    ]);
-});
+require __DIR__.'/auth.php';

@@ -1,13 +1,43 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'Kel & Co')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> --}}
-    
+
     <style>
+        .kc-login-btn:hover {
+            background-color: #8B7355;
+            border-color: #8B7355;
+            color: #F5F1E8 !important;
+        }
+
+        .kc-login-btn {
+            color: #8B7355 !important;
+            font-size: 0.85rem;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #2C2416 !important;
+            position: relative;
+            border: 1px solid #C9B8A3;
+            /* OUTLINE COKLAT BEIGE */
+            border-radius: 40px;
+        }
+
+        .kc-login-btn:focus,
+        .kc-login-btn:active {
+            outline: none !important;
+            box-shadow: none !important;
+            /* hilangin glow biru bootstrap */
+            background-color: #8B7355 !important;
+            border-color: #8B7355 !important;
+            color: #F5F1E8 !important;
+        }
+
         .kc-navbar {
             background-color: #F5F1E8;
             border-bottom: 1px solid #D4C4B0;
@@ -136,18 +166,20 @@
             background-color: #F5F1E8;
         }
     </style>
-    
+
     @yield('styles')
 </head>
+
 <body>
     @include('layout.nav')
-    
+
     @yield('content')
-    
+
     @include('layout.footer')
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
     @yield('scripts')
 </body>
+
 </html>
