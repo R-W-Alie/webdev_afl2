@@ -5,14 +5,41 @@ use App\Http\Controllers\StoreController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Auth;
 
+// ==========================
+// PUBLIC PAGES
+// ==========================
+Route::get('/', function () {
+    return view('home');
+})->name('home');
 
-Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+Route::get('/store', [StoreController::class, 'index'])->name('store.index');
 Route::get('/product', [ProductController::class, 'index'])->name('products.index');
 
+// ==========================
+// AUTH PAGES (login + register)
+// ==========================
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.process');
+
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.process');
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// ==========================
+// ONLY LOGGED-IN USERS
+// ==========================
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+});
+
+// ==========================
+// ADMIN AREA
+// ==========================
 Route::prefix('admin')->name('admin.')->group(function () {
+
     Route::get('/products', [ProductController::class, 'adminIndex'])->name('products.index');
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
     Route::post('/products', [ProductController::class, 'store'])->name('products.store');
@@ -27,9 +54,3 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::put('/stores/{store}', [StoreController::class, 'update'])->name('stores.update');
     Route::delete('/stores/{store}', [StoreController::class, 'destroy'])->name('stores.destroy');
 });
-
-Route::get('/', function () {
-    return view('home');
-});
-
-Route::get('/store', [StoreController::class, 'index'])->name('store.index');

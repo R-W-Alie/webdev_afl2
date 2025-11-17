@@ -3,13 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use Illuminate\Support\Facades\Auth; // ← WAJIB TAMBAH INI!
 
 class ProfileController extends Controller
 {
+    public function __construct()
+    {
+        // Hanya user login boleh akses
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        $user = User::first();//ambil data user kesatu for sementara
+        // Ambil user yang lagi login
+        $user = Auth::user(); // ← PALING AMAN (tidak error)
 
         return view('profile', compact('user'));
     }

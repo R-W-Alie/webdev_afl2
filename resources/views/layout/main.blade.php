@@ -13,6 +13,35 @@
             border-bottom: 1px solid #D4C4B0;
         }
 
+        .kc-login-btn:hover {
+            background-color: #8B7355;
+            border-color: #8B7355;
+            color: #F5F1E8 !important;
+        }
+
+        .kc-login-btn {
+            color: #8B7355 !important;
+            font-size: 0.85rem;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #2C2416 !important;
+            position: relative;
+            border: 1px solid #C9B8A3;
+            /* OUTLINE COKLAT BEIGE */
+            border-radius: 40px;
+        }
+
+        .kc-login-btn:focus,
+        .kc-login-btn:active {
+            outline: none !important;
+            box-shadow: none !important;
+            /* hilangin glow biru bootstrap */
+            background-color: #8B7355 !important;
+            border-color: #8B7355 !important;
+            color: #F5F1E8 !important;
+        }
+
         .kc-brand {
             font-size: 1.4rem;
             font-weight: 300;
