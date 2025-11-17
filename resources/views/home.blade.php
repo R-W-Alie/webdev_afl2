@@ -4,7 +4,7 @@
 
 @section('styles')
     <style>
-        /* GBS KLO PAKE BOOTSTRAP ONLY */
+        /* gbs klo pake bootstrap aja */
         .hero-section {
             position: relative;
             height: 90vh;
@@ -35,7 +35,6 @@
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
-        /* Custom letter-spacing - not available in Bootstrap */
         .hero-title {
             letter-spacing: 0.05em;
         }
@@ -82,7 +81,6 @@
             color: #2C2416;
         }
 
-        /* Responsive adjustments */
         @media (max-width: 768px) {
             .hero-content {
                 left: 5%;
@@ -146,7 +144,7 @@
         </button>
     </div>
 
-    <!-- About Section -->
+    <!-- ABOUT -->
     <div class="py-5" style="padding-top: 100px !important; padding-bottom: 100px !important;">
         <div class="container">
             <div class="text-center mb-5">

@@ -9,7 +9,11 @@ class StoreController extends Controller
 {
     public function index()
     {
-        $stores = Store::all();
+        $stores = Store::paginate(6);;
+        return view('store', compact('stores'));
+
+        $stores = $query->paginate(6);
+        $stores->appends($request->all());
         return view('store', compact('stores'));
     }
     
