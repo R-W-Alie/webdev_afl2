@@ -4,7 +4,6 @@
 
 @section('content')
     <div class="container-fluid">
-        <!-- Header -->
         <div class="mb-4">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
@@ -24,7 +23,6 @@
                         <form method="POST" action="{{ route('admin.stores.store') }}" enctype="multipart/form-data">
                             @csrf
 
-                            <!-- Store Name -->
                             <div class="mb-4">
                                 <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
                                     Store Name <span class="text-danger">*</span>
@@ -38,7 +36,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Location -->
                             <div class="mb-4">
                                 <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
                                     Location <span class="text-danger">*</span>
@@ -52,7 +49,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Description -->
                             <div class="mb-4">
                                 <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
                                     Description <span class="text-danger">*</span>
@@ -66,7 +62,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Image Upload -->
                             <div class="mb-4">
                                 <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
                                     Store Image
@@ -80,7 +75,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Buttons -->
                             <div class="d-flex gap-2 pt-3">
                                 <button type="submit" class="btn btn-primary-custom px-4">
                                     <i class="fa-solid fa-check me-2"></i>Create Store
@@ -94,7 +88,6 @@
                 </div>
             </div>
 
-            <!-- Tips Card -->
             <div class="col-lg-4">
                 <div class="card shadow-sm">
                     <div class="card-body">

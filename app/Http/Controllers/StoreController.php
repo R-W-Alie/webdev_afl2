@@ -68,9 +68,9 @@ class StoreController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        // Handle new image upload
+       
         if ($request->hasFile('image')) {
-            // Delete old image if exists
+           
             if ($store->image && Storage::disk('public')->exists($store->image)) {
                 Storage::disk('public')->delete($store->image);
             }
@@ -85,7 +85,6 @@ class StoreController extends Controller
 
     public function destroy(Store $store)
     {
-        // Delete image if exists
         if ($store->image && Storage::disk('public')->exists($store->image)) {
             Storage::disk('public')->delete($store->image);
         }

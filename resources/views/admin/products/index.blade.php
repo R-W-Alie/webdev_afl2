@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <!-- Header -->
+        
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
                 <h1 class="display-6 fw-light text-uppercase mb-2 text-dark" style="letter-spacing: 0.15em;">
@@ -17,7 +17,7 @@
             </a>
         </div>
 
-        <!-- Success Message -->
+
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert" style="border-left: 4px solid #8B7355;">
                 <i class="fa-solid fa-circle-check me-2"></i>{{ session('success') }}
@@ -25,7 +25,7 @@
             </div>
         @endif
 
-        <!-- Search Bar -->
+
         <div class="row mb-4">
             <div class="col-lg-6">
                 <form action="{{ route('admin.products.index') }}" method="GET">
@@ -62,7 +62,7 @@
             </div>
         @endif
 
-        <!-- Products Table -->
+
         <div class="card shadow-sm">
             <div class="card-body p-0">
                 <div class="table-responsive">
@@ -140,7 +140,7 @@
             </div>
         </div>
 
-        <!-- Pagination -->
+
         @if ($products->hasPages())
             <div class="mt-4">
                 {{ $products->links('pagination::bootstrap-5') }}

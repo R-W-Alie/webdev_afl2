@@ -4,7 +4,6 @@
 
 @section('content')
     <div class="container-fluid">
-        <!-- Header -->
         <div class="mb-4">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
@@ -39,7 +38,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Location -->
                             <div class="mb-4">
                                 <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
                                     Location <span class="text-danger">*</span>
@@ -53,7 +51,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Description -->
                             <div class="mb-4">
                                 <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
                                     Description <span class="text-danger">*</span>
@@ -67,7 +64,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Current Image -->
                             @if($store->image)
                                 <div class="mb-4">
                                     <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
@@ -82,7 +78,6 @@
                                 </div>
                             @endif
 
-                            <!-- New Image Upload -->
                             <div class="mb-4">
                                 <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
                                     Update Image (optional)
@@ -96,7 +91,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Buttons -->
                             <div class="d-flex gap-2 pt-3">
                                 <button type="submit" class="btn btn-primary-custom px-4">
                                     <i class="fa-solid fa-check me-2"></i>Update Store
@@ -110,7 +104,6 @@
                 </div>
             </div>
 
-            <!-- Store Info -->
             <div class="col-lg-4">
                 <div class="card shadow-sm">
                     <div class="card-body">

@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <!-- Header -->
+
         <div class="mb-4">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
@@ -25,7 +25,7 @@
                         <form method="POST" action="{{ route('admin.products.store') }}" enctype="multipart/form-data">
                             @csrf
 
-                            <!-- Product Name -->
+               
                             <div class="mb-4">
                                 <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
                                     Product Name <span class="text-danger">*</span>
@@ -38,7 +38,7 @@
                                 @enderror
                             </div>
 
-                            <!-- Description -->
+        
                             <div class="mb-4">
                                 <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
                                     Description <span class="text-danger">*</span>
@@ -63,7 +63,7 @@
                                 @enderror
                             </div>
 
-                            <!-- Image Upload -->
+                  
                             <div class="mb-4">
                                 <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
                                     Product Image
@@ -97,7 +97,7 @@
                 </div>
             </div>
 
-            <!-- Preview Card (Optional) -->
+           
             <div class="col-lg-4">
                 <div class="card shadow-sm">
                     <div class="card-body">
