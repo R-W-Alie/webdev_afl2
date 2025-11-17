@@ -22,7 +22,18 @@ class User extends Authenticatable
         'email',
         'password',
         'location', //i tambahin ini biar gk usa bikin kek file orng baru gt
+        'role',
     ];
+
+        public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isCustomer()
+    {
+        return $this->role === 'customer';
+    }
 
     /**
      * The attributes that should be hidden for serialization.

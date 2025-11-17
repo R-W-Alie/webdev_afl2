@@ -4,6 +4,7 @@
 
 @section('styles')
     <style>
+        /* GBS KLO PAKE BOOTSTRAP ONLY */
         .hero-section {
             position: relative;
             height: 90vh;
@@ -34,20 +35,20 @@
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
+        /* Custom letter-spacing - not available in Bootstrap */
         .hero-title {
-            font-size: 3.5rem;
-            font-weight: 300;
             letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
         }
 
         .hero-subtitle {
-            font-size: 1.1rem;
-            font-weight: 300;
             letter-spacing: 0.1em;
-            text-transform: uppercase;
         }
 
+        .section-title {
+            letter-spacing: 0.15em;
+        }
+
+        /* Carousel indicators - custom styling */
         .carousel-indicators button {
             width: 40px;
             height: 2px;
@@ -59,61 +60,21 @@
             background-color: white;
         }
 
-        .carousel-control-prev-icon,
-        .carousel-control-next-icon {
-            filter: brightness(0) invert(1);
-        }
-
-        .about-section {
-            /* background-color: #E8DCC8; */
-            padding: 100px 0;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 300;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: #2C2416;
-            margin-bottom: 2rem;
-        }
-
+        /* Custom divider color */
         .divider {
-            width: 80px;
-            height: 1px;
             background-color: #8B7355;
-            margin: 0 auto 3rem;
         }
 
-        .about-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #2C2416;
-            font-weight: 300;
-        }
-
+        /* Custom brand colors */
         .brand-name {
             color: #8B7355;
-            font-weight: 400;
         }
-
-        /* .cta-section {
-            background-color: #F5F1E8;
-            padding: 80px 0;
-        } */
 
         .cta-button {
             background-color: #2C2416;
             color: white;
             border: 1px solid #2C2416;
-            padding: 14px 50px;
-            font-size: 0.9rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
             transition: all 0.3s ease;
-            font-weight: 300;
-            text-decoration: none;
-            display: inline-block;
         }
 
         .cta-button:hover {
@@ -121,18 +82,11 @@
             color: #2C2416;
         }
 
+        /* Responsive adjustments */
         @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2rem;
-            }
-
             .hero-content {
                 left: 5%;
                 bottom: 5%;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
             }
         }
     </style>
@@ -147,8 +101,8 @@
                         class="hero-image" alt="Timeless Elegance">
                     <div class="hero-overlay"></div>
                     <div class="hero-content">
-                        <h1 class="hero-title">Timeless Elegance</h1>
-                        <p class="hero-subtitle">Discover our new collection</p>
+                        <h1 class="hero-title display-3 fw-light mb-2">Timeless Elegance</h1>
+                        <p class="hero-subtitle text-uppercase fw-light fs-6">Discover our new collection</p>
                     </div>
                 </div>
             </div>
@@ -159,8 +113,8 @@
                         class="hero-image" alt="Refined Luxury">
                     <div class="hero-overlay"></div>
                     <div class="hero-content">
-                        <h1 class="hero-title">Refined Luxury</h1>
-                        <p class="hero-subtitle">Crafted with precision and care</p>
+                        <h1 class="hero-title display-3 fw-light mb-2">Refined Luxury</h1>
+                        <p class="hero-subtitle text-uppercase fw-light fs-6">Crafted with precision and care</p>
                     </div>
                 </div>
             </div>
@@ -171,8 +125,8 @@
                         class="hero-image" alt="Modern Sophistication">
                     <div class="hero-overlay"></div>
                     <div class="hero-content">
-                        <h1 class="hero-title">Modern Sophistication</h1>
-                        <p class="hero-subtitle">Where style meets comfort</p>
+                        <h1 class="hero-title display-3 fw-light mb-2">Modern Sophistication</h1>
+                        <p class="hero-subtitle text-uppercase fw-light fs-6">Where style meets comfort</p>
                     </div>
                 </div>
             </div>
@@ -192,38 +146,39 @@
         </button>
     </div>
 
-    <div class="about-section">
+    <!-- About Section -->
+    <div class="py-5" style="padding-top: 100px !important; padding-bottom: 100px !important;">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="section-title">About Us</h2>
-                <div class="divider"></div>
+                <h2 class="section-title display-5 fw-light text-uppercase text-dark mb-4">About Us</h2>
+                <hr class="divider mx-auto mb-5 opacity-75" style="width: 80px; height: 1px;">
             </div>
 
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <p class="about-text text-center mb-4">
-                        At <span class="brand-name">Kel & Co</span>, we believe elegance is not just a look — it's an
+                    <p class="text-center mb-4 fs-5 lh-lg text-dark fw-light">
+                        At <span class="brand-name fw-normal">Kel & Co</span>, we believe elegance is not just a look — it's an
                         experience.
                         Our passion lies in curating collections that blend classic sophistication with modern design,
                         allowing you to express your individuality with confidence and grace.
                     </p>
 
-                    <p class="about-text text-center">
+                    <p class="text-center fs-5 lh-lg text-dark fw-light">
                         Each piece is crafted with meticulous attention to detail, merging artistry and precision.
                         From design to craftsmanship, we strive to ensure that every creation reflects quality,
                         comfort, and timeless beauty.
                     </p>
                 </div>
 
-                <div>
-                    <div class="container text-center mt-5">
-                        <a href="/product" class="cta-button">Explore Collection</a>
+                <div class="col-12">
+                    <div class="text-center mt-5">
+                        <a href="/product" class="cta-button btn text-uppercase fw-light px-5 py-3 text-decoration-none" 
+                           style="font-size: 0.9rem;">
+                            Explore Collection
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
 @endsection
