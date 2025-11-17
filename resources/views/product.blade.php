@@ -72,7 +72,7 @@
                                 {{ $product->description }}
                             </p>
                             <div class="mt-auto">
-                                <p class="fw-normal mb-0" style="color: #8B7355; letter-spacing: 0.05em;">
+                                <p class="fw-normal mb-0" style="color: #8b7355; letter-spacing: 0.05em;">
                                     Rp {{ number_format($product->price, 0, ',', '.') }}
                                 </p>
                             </div>
