@@ -16,14 +16,13 @@ class Product extends Model
         'image',
     ];
 
-     public function store()
+    public function store()
     {
         return $this->belongsTo(Store::class);
     }
 
     public function users()
-{
-    return $this->belongsToMany(User::class, 'product_user');
-}
-
+    {
+        return $this->belongsToMany(User::class, 'product_user');
+    }
 }

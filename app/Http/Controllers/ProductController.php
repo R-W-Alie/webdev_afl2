@@ -83,7 +83,7 @@ class ProductController extends Controller
             if ($product->image) {
                 Storage::disk('public')->delete($product->image);
             }
-            $validated['image'] = $request->file('image')->store('products', 'public');
+            $validated['image'] = $request->file('image')->store('products', 'public'); //masukin dulu br delet
         }
 
         $product->update($validated);
