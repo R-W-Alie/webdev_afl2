@@ -5,7 +5,6 @@ use App\Http\Controllers\StoreController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Auth;
 
 // ==========================
 // PUBLIC PAGES
@@ -18,7 +17,7 @@ Route::get('/store', [StoreController::class, 'index'])->name('store.index');
 Route::get('/product', [ProductController::class, 'index'])->name('products.index');
 
 // ==========================
-// AUTH PAGES (login + register)
+// AUTH (Login & Register)
 // ==========================
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.process');
@@ -33,24 +32,35 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // ==========================
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+
+    // NEW → Edit Profile Page
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+
+    // NEW → Update Profile
+    Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 // ==========================
-// ADMIN AREA
+// ADMIN AREA (with middleware)
 // ==========================
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
 
-    Route::get('/products', [ProductController::class, 'adminIndex'])->name('products.index');
-    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-    Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
-    Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
-    Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+        // PRODUCT Admin routes
+        Route::get('/products', [ProductController::class, 'adminIndex'])->name('products.index');
+        Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+        Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+        Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+        Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
+        Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 
-    Route::get('/stores', [StoreController::class, 'adminIndex'])->name('stores.index');
-    Route::get('/stores/create', [StoreController::class, 'create'])->name('stores.create');
-    Route::post('/stores', [StoreController::class, 'store'])->name('stores.store');
-    Route::get('/stores/{store}/edit', [StoreController::class, 'edit'])->name('stores.edit');
-    Route::put('/stores/{store}', [StoreController::class, 'update'])->name('stores.update');
-    Route::delete('/stores/{store}', [StoreController::class, 'destroy'])->name('stores.destroy');
-});
+        // STORE Admin routes
+        Route::get('/stores', [StoreController::class, 'adminIndex'])->name('stores.index');
+        Route::get('/stores/create', [StoreController::class, 'create'])->name('stores.create');
+        Route::post('/stores', [StoreController::class, 'store'])->name('stores.store');
+        Route::get('/stores/{store}/edit', [StoreController::class, 'edit'])->name('stores.edit');
+        Route::put('/stores/{store}', [StoreController::class, 'update'])->name('stores.update');
+        Route::delete('/stores/{store}', [StoreController::class, 'destroy'])->name('stores.destroy');
+    });
