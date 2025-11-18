@@ -155,7 +155,8 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <p class="text-center mb-4 fs-5 lh-lg text-dark fw-light">
-                        At <span class="brand-name fw-normal">Kel & Co</span>, we believe elegance is not just a look — it's an
+                        At <span class="brand-name fw-normal">Kel & Co</span>, we believe elegance is not just a look — it's
+                        an
                         experience.
                         Our passion lies in curating collections that blend classic sophistication with modern design,
                         allowing you to express your individuality with confidence and grace.
@@ -170,8 +171,8 @@
 
                 <div class="col-12">
                     <div class="text-center mt-5">
-                        <a href="/product" class="cta-button btn text-uppercase fw-light px-5 py-3 text-decoration-none" 
-                           style="font-size: 0.9rem;">
+                        <a href="/product" class="cta-button btn text-uppercase fw-light px-5 py-3 text-decoration-none"
+                            style="font-size: 0.9rem;">
                             Explore Collection
                         </a>
                     </div>

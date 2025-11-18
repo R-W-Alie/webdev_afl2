@@ -31,13 +31,17 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // ONLY LOGGED-IN USERS
 // ==========================
 Route::middleware('auth')->group(function () {
+
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 
-    // NEW → Edit Profile Page
+    // Edit Profile Page
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 
-    // NEW → Update Profile
+    // Update Profile
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+
+    // DELETE ACCOUNT
+    Route::delete('/profile/delete', [ProfileController::class, 'destroy'])->name('profile.delete');
 });
 
 // ==========================
