@@ -4,28 +4,35 @@ namespace App\Http\Controllers;
 
 use App\Models\Store;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;  
+use Illuminate\Support\Facades\Storage;
 
 class StoreController extends Controller
 {
     public function index(Request $request)
     {
-        $stores = Store::paginate(6);
+        // Eager load products for each store
+        $stores = Store::with('products')->paginate(6);
+
         return view('store', compact('stores'));
     }
 
-     public function adminIndex(Request $request)
+    public function adminIndex(Request $request)
     {
         $search = $request->input('search');
-        $stores = Store::query()
+
+        // Eager load products and allow search in store or product names
+        $stores = Store::with('products')
             ->when($search, function ($query, $search) {
                 return $query->where('name', 'like', "%{$search}%")
-                    ->orWhere('location', 'like', "%{$search}%");
+                    ->orWhere('location', 'like', "%{$search}%")
+                    ->orWhereHas('products', function ($q) use ($search) {
+                        $q->where('name', 'like', "%{$search}%");
+                    });
             })
             ->latest()
             ->paginate(10)
             ->appends(['search' => $search]);
-        
+
         return view('admin.stores.index', compact('stores'));
     }
 
@@ -43,7 +50,6 @@ class StoreController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        // Handle image upload
         if ($request->hasFile('image')) {
             $validated['image'] = $request->file('image')->store('stores', 'public');
         }
@@ -68,9 +74,7 @@ class StoreController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-       
         if ($request->hasFile('image')) {
-           
             if ($store->image && Storage::disk('public')->exists($store->image)) {
                 Storage::disk('public')->delete($store->image);
             }

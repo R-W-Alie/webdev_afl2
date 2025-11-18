@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -11,15 +11,18 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        
-        $products = Product::query()
+
+        $products = Product::with('store')
             ->when($search, function ($query, $search) {
                 return $query->where('name', 'like', "%{$search}%")
-                            ->orWhere('description', 'like', "%{$search}%");
+                    ->orWhere('description', 'like', "%{$search}%")
+                    ->orWhereHas('store', function ($q) use ($search) {
+                        $q->where('name', 'like', "%{$search}%");
+                    });
             })
             ->paginate(6)
             ->appends(['search' => $search]);
-        
+
         return view('product', compact('products'));
     }
 
@@ -33,11 +36,11 @@ class ProductController extends Controller
             ->latest()
             ->paginate(10)
             ->appends(['search' => $search]);
-        
+
         return view('admin.products.index', compact('products'));
     }
 
-        public function create()
+    public function create()
     {
         return view('admin.products.create');
     }
@@ -48,7 +51,7 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($request->hasFile('image')) {
@@ -72,12 +75,11 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-    
         if ($request->hasFile('image')) {
-        
+
             if ($product->image) {
                 Storage::disk('public')->delete($product->image);
             }
@@ -102,6 +104,4 @@ class ProductController extends Controller
         return redirect()->route('admin.products.index')
             ->with('success', 'Product deleted successfully!');
     }
-
-    
 }

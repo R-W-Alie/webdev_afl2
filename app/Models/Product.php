@@ -16,9 +16,9 @@ class Product extends Model
         'image',
     ];
 
-    public function stores()
+     public function store()
     {
-        return $this->belongsToMany(Store::class, 'product_store');
+        return $this->belongsTo(Store::class);
     }
 
     public function users()
