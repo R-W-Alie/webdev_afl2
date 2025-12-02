@@ -14,9 +14,13 @@ public function up(): void
     Schema::create('stores', function (Blueprint $table) {
         $table->id();
         $table->string('name');
-        $table->string('image')->nullable();
         $table->text('description')->nullable();
-        $table->string('location')->nullable();
+        $table->string('address');
+        $table->string('city', 100);
+        $table->string('phone', 20)->nullable();
+        $table->string('email')->nullable();
+        $table->string('image')->nullable();
+
         $table->timestamps();
     });
 }
