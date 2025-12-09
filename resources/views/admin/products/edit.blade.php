@@ -1,9 +1,9 @@
-@extends('layout.admin')
+@extends('layout.main')
 
-@section('title', 'Edit Product')
+@section('title', 'Edit Product - KEL & CO')
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container py-5">
         <div class="mb-4">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
@@ -11,14 +11,15 @@
                     <li class="breadcrumb-item active" aria-current="page">Edit</li>
                 </ol>
             </nav>
-            <h1 class="display-6 fw-light text-uppercase mb-2 text-dark" style="letter-spacing: 0.15em;">
+            <h1 class="h3 text-uppercase fw-light mb-1" style="letter-spacing:0.2em; color:#2C2416;">
                 Edit Product
             </h1>
+            <div class="text-muted small" style="letter-spacing:0.05em;">Update product details and media</div>
         </div>
 
         <div class="row">
             <div class="col-lg-8">
-                <div class="card shadow-sm">
+                <div class="card shadow-sm" style="border:1px solid #D4C4B0;">
                     <div class="card-body p-4">
                         <form method="POST" action="{{ route('admin.products.update', $product) }}" enctype="multipart/form-data">
                             @csrf
@@ -97,10 +98,10 @@
 
                             <!-- Buttons -->
                             <div class="d-flex gap-2 pt-3">
-                                <button type="submit" class="btn btn-primary-custom px-4">
+                                <button type="submit" class="btn btn-dark px-4" style="background:#2C2416; border-color:#2C2416; letter-spacing:0.05em;">
                                     <i class="fa-solid fa-check me-2"></i>Update Product
                                 </button>
-                                <a href="{{ route('admin.products.index') }}" class="btn btn-outline-custom px-4">
+                                <a href="{{ route('admin.products.index') }}" class="btn btn-outline-secondary px-4" style="border-color:#D4C4B0; color:#5C4D3C;">
                                     Cancel
                                 </a>
                             </div>

@@ -15,7 +15,6 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Real data (kept for all environments)
         $admin = User::updateOrCreate(
             ['email' => 'admin@kelco.com'],
             [

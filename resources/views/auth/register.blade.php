@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 75vh;">
-    <div class="card shadow-sm border rounded-3 p-4" style="max-width: 420px; width: 100%; border-color: #D4C4B0;">
+    <div class="card shadow-sm border rounded-3 p-4 my-5" style="max-width: 420px; width: 100%; border-color: #D4C4B0;">
         <h3 class="text-center mb-4 text-dark fw-light" style="letter-spacing: 0.05em;">Create Account</h3>
 
         @if ($errors->any())

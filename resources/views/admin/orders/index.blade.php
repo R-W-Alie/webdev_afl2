@@ -1,26 +1,26 @@
-@extends('layout.admin')
+@extends('layout.main')
 
-@section('title', 'Orders')
+@section('title', 'Orders - KEL & CO')
 
 @section('content')
-<div class="container-fluid">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+<div class="container py-5">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
         <div>
-            <h1 class="h4 text-uppercase fw-light mb-1" style="letter-spacing:0.15em; color:#2C2416;">Orders</h1>
-            <p class="text-muted mb-0">Recent orders placed by customers</p>
+            <h1 class="h3 text-uppercase fw-light mb-1" style="letter-spacing:0.2em; color:#2C2416;">Orders</h1>
+            <div class="text-muted small" style="letter-spacing:0.05em;">Recent orders placed by customers</div>
         </div>
     </div>
 
-    <div class="card shadow-sm mb-3">
+    <div class="card shadow-sm mb-3" style="border:1px solid #D4C4B0;">
         <div class="card-body">
             <form method="GET" action="{{ route('admin.orders.index') }}" class="row g-2 align-items-end">
                 <div class="col-md-4">
                     <label class="form-label text-muted small">Search</label>
-                    <input type="text" name="q" value="{{ $q ?? '' }}" class="form-control" placeholder="Order number or customer name">
+                    <input type="text" name="q" value="{{ $q ?? '' }}" class="form-control" placeholder="Order number or customer name" style="border-color:#D4C4B0;">
                 </div>
                 <div class="col-md-3">
                     <label class="form-label text-muted small">Status</label>
-                    <select name="status" class="form-select">
+                    <select name="status" class="form-select" style="border-color:#D4C4B0;">
                         <option value="">All</option>
                         @foreach(['pending','processing','shipped','delivered','cancelled'] as $s)
                             <option value="{{ $s }}" @selected(($status ?? '') === $s)>{{ ucfirst($s) }}</option>
@@ -28,8 +28,8 @@
                     </select>
                 </div>
                 <div class="col-md-3 d-flex gap-2">
-                    <button class="btn btn-dark mt-4" style="background:#2C2416; border-color:#2C2416;">Filter</button>
-                    <a href="{{ route('admin.orders.index') }}" class="btn btn-outline-secondary mt-4">Clear</a>
+                    <button class="btn btn-dark mt-4" style="background:#2C2416; border-color:#2C2416; letter-spacing:0.05em;">Filter</button>
+                    <a href="{{ route('admin.orders.index') }}" class="btn btn-outline-secondary mt-4" style="border-color:#D4C4B0; color:#5C4D3C;">Clear</a>
                 </div>
             </form>
         </div>

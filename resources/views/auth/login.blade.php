@@ -41,6 +41,13 @@
                 Login
             </button>
         </form>
+
+        <hr class="my-4" style="border-color: #D4C4B0;">
+
+        <p class="text-center text-secondary mb-0">
+            Don't have an account? 
+            <a href="{{ route('register') }}" class="text-decoration-none fw-normal" style="color: #2C2416;">Register here</a>
+        </p>
     </div>
 </div>
 @endsection

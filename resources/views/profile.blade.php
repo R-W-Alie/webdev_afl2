@@ -141,7 +141,7 @@
                             </a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="btn btn-outline-secondary" style="letter-spacing:0.08em; border-color:#D4C4B0; color:#2C2416;">Logout</button>
+                                <button type="submit" class="btn btn-outline-secondary edit-profile-btn">Logout</button>
                             </form>
                         </div>
                     </div>

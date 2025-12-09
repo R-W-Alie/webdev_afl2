@@ -1,26 +1,26 @@
-@extends('layout.admin')
+@extends('layout.main')
 
-@section('title', 'Customers')
+@section('title', 'Customers - KEL & CO')
 
 @section('content')
-<div class="container-fluid">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+<div class="container py-5">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
         <div>
-            <h1 class="h4 text-uppercase fw-light mb-1" style="letter-spacing:0.15em; color:#2C2416;">Customers</h1>
-            <p class="text-muted mb-0">Customer accounts and basic info</p>
+            <h1 class="h3 text-uppercase fw-light mb-1" style="letter-spacing:0.2em; color:#2C2416;">Customers</h1>
+            <div class="text-muted small" style="letter-spacing:0.05em;">Customer accounts and basic info</div>
         </div>
     </div>
 
-    <div class="card shadow-sm mb-3">
+    <div class="card shadow-sm mb-3" style="border:1px solid #D4C4B0;">
         <div class="card-body">
             <form method="GET" action="{{ route('admin.customers.index') }}" class="row g-2 align-items-end">
                 <div class="col-md-5">
                     <label class="form-label text-muted small">Search</label>
-                    <input type="text" name="q" value="{{ $q ?? '' }}" class="form-control" placeholder="Name, email, or phone">
+                    <input type="text" name="q" value="{{ $q ?? '' }}" class="form-control" placeholder="Name, email, or phone" style="border-color:#D4C4B0;">
                 </div>
                 <div class="col-md-3 d-flex gap-2">
-                    <button class="btn btn-dark mt-4" style="background:#2C2416; border-color:#2C2416;">Filter</button>
-                    <a href="{{ route('admin.customers.index') }}" class="btn btn-outline-secondary mt-4">Clear</a>
+                    <button class="btn btn-dark mt-4" style="background:#2C2416; border-color:#2C2416; letter-spacing:0.05em;">Filter</button>
+                    <a href="{{ route('admin.customers.index') }}" class="btn btn-outline-secondary mt-4" style="border-color:#D4C4B0; color:#5C4D3C;">Clear</a>
                 </div>
             </form>
         </div>
