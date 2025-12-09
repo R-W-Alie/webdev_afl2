@@ -20,7 +20,8 @@ class StoreController extends Controller
         $stores = Store::query()
             ->when($search, function ($query, $search) {
                 return $query->where('name', 'like', "%{$search}%")
-                    ->orWhere('location', 'like', "%{$search}%");
+                    ->orWhere('city', 'like', "%{$search}%")
+                    ->orWhere('address', 'like', "%{$search}%");
             })
             ->latest()
             ->paginate(10)
@@ -39,8 +40,11 @@ class StoreController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'location' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'address' => 'required|string|max:255',
+            'city' => 'required|string|max:100',
+            'phone' => 'nullable|string|max:20',
+            'email' => 'nullable|email|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:4096'
         ]);
 
         // Handle image upload
@@ -64,8 +68,11 @@ class StoreController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'location' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'address' => 'required|string|max:255',
+            'city' => 'required|string|max:100',
+            'phone' => 'nullable|string|max:20',
+            'email' => 'nullable|email|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:4096'
         ]);
 
        

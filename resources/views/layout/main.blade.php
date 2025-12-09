@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'Kel & Co')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
     <style>
         .kc-navbar {
@@ -134,6 +134,9 @@
 
         body {
             background-color: #F5F1E8;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.05em;
         }
     </style>
     

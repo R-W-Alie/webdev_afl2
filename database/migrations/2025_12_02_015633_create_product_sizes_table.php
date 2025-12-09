@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('product_sizes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
-            $table->enum('size', ['XS', 'S', 'M', 'L', 'XL']);
+            $table->enum('size', ['XS', 'S', 'M', 'L', 'XL', 'XXL']);
             $table->integer('stock')->default(0);
             $table->timestamps();
 

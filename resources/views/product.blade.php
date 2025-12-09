@@ -1,10 +1,11 @@
 @extends('layout.main')
 
+@php use Illuminate\Support\Str; @endphp
+
 @section('title', 'Our Products - Kel & Co')
 
 @section('content')
     <div class="container my-5 py-5">
-        <!-- Header -->
         <div class="text-center mb-5">
             <h1 class="display-4 fw-light text-uppercase mb-4 text-dark" style="letter-spacing: 0.15em;">
                 Our Products
@@ -12,7 +13,6 @@
             <hr class="mx-auto opacity-75" style="width: 80px; height: 1px; background-color: #8B7355;">
         </div>
 
-        <!-- Search Bar -->
         <div class="row justify-content-center mb-5">
             <div class="col-lg-6">
                 <form action="{{ url()->current() }}" method="GET">
@@ -33,7 +33,6 @@
             </div>
         </div>
 
-        <!-- Search Results Info -->
         @if (request('search'))
             <div class="row justify-content-center mb-4">
                 <div class="col-12">
@@ -55,18 +54,25 @@
             </div>
         @endif
 
-        <!-- Products Grid -->
         <div class="row g-4">
             @forelse ($products as $product)
                 <div class="col-md-6 col-lg-4">
                     <div class="card border-0 shadow-sm h-100">
                         <div class="overflow-hidden">
-                            <img src="{{ $product->image }}" class="card-img-top" alt="{{ $product->name }}"
+                            @php
+                                $thumb = $product->primaryImage->image_url ?? $product->image ?? null;
+                                $thumbUrl = $thumb ? (Str::startsWith($thumb, ['http://', 'https://']) ? $thumb : asset('storage/'.$thumb)) : null;
+                            @endphp
+                            @if($thumbUrl)
+                            <img src="{{ $thumbUrl }}" class="card-img-top" alt="{{ $product->name }}"
                                 style="height: 280px; object-fit: cover;">
+                            @else
+                            <div class="bg-light" style="height: 280px;"></div>
+                            @endif
                         </div>
                         <div class="card-body d-flex flex-column">
                             <h5 class="fw-normal mb-2 text-dark" style="letter-spacing: 0.05em;">
-                                {{ $product->name }}
+                                <a href="{{ route('products.show', $product->slug) }}" class="text-decoration-none text-dark">{{ $product->name }}</a>
                             </h5>
                             <p class="small mb-3 lh-base" style="color: #5C4D3C;">
                                 {{ $product->description }}
@@ -94,7 +100,6 @@
             @endforelse
         </div>
 
-        <!-- Pagination -->
         @if ($products->hasPages())
             <div class="mt-5">
                 {{ $products->links('pagination::bootstrap-5') }}

@@ -129,21 +129,21 @@
                         <!-- divider -->
                         <div class="profile-divider"></div>
 
-                        <!-- location -->
-                        <div class="profile-info-item">
-                            <i class="fa-solid fa-location-dot"></i>
-                            <span>{{ $user->location ?? 'Location not set' }}</span>
-                        </div>
-
                         <!-- since when -->
                         <p class="profile-meta mb-4">
                             Member since {{ $user->created_at->format('F Y') }}
                         </p>
 
-                        <!-- edit -->
-                        <a href="#" class="edit-profile-btn mt-2">
-                            Edit Profile
-                        </a>
+                        <!-- actions -->
+                        <div class="d-flex justify-content-center gap-2 mt-2">
+                            <a href="#" class="edit-profile-btn">
+                                Edit Profile
+                            </a>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="btn btn-outline-secondary" style="letter-spacing:0.08em; border-color:#D4C4B0; color:#2C2416;">Logout</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

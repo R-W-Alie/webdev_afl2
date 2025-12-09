@@ -1,5 +1,7 @@
 @extends('layout.admin')
 
+@php use Illuminate\Support\Str; @endphp
+
 @section('title', 'Manage Stores')
 
 @section('content')
@@ -66,7 +68,8 @@
                             <tr>
                                 <th class="py-3 px-4" style="color: #5C4D3C; letter-spacing: 0.05em;">Image</th>
                                 <th class="py-3 px-4" style="color: #5C4D3C; letter-spacing: 0.05em;">Store Name</th>
-                                <th class="py-3 px-4" style="color: #5C4D3C; letter-spacing: 0.05em;">Location</th>
+                                <th class="py-3 px-4" style="color: #5C4D3C; letter-spacing: 0.05em;">City</th>
+                                <th class="py-3 px-4" style="color: #5C4D3C; letter-spacing: 0.05em;">Contact</th>
                                 <th class="py-3 px-4" style="color: #5C4D3C; letter-spacing: 0.05em;">Description</th>
                                 <th class="py-3 px-4 text-end" style="color: #5C4D3C; letter-spacing: 0.05em;">Actions</th>
                             </tr>
@@ -94,8 +97,13 @@
                                     </td>
                                     <td class="py-3 px-4">
                                         <span class="small" style="color: #8B7355;">
-                                            <i class="fa-solid fa-location-dot me-1"></i>{{ $store->location }}
+                                            <i class="fa-solid fa-location-dot me-1"></i>{{ $store->city }}
                                         </span>
+                                        <div class="small text-muted">{{ Str::limit($store->address, 40) }}</div>
+                                    </td>
+                                    <td class="py-3 px-4">
+                                        <div class="small" style="color: #2C2416;">{{ $store->phone ?? '-' }}</div>
+                                        <div class="small text-muted">{{ $store->email ?? '' }}</div>
                                     </td>
                                     <td class="py-3 px-4">
                                         <span class="small text-muted">

@@ -12,11 +12,38 @@ class Product extends Model
     protected $fillable = [
         'category_id',
         'name',
+        'slug',
         'description',
+        'image',
         'price',
         'stock_quantity',
         'is_featured',
     ];
+
+    protected $casts = [
+        'price' => 'decimal:2',
+        'is_featured' => 'boolean',
+    ];
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($product) {
+            if (empty($product->slug)) {
+                $product->slug = \Illuminate\Support\Str::slug($product->name);
+            }
+        });
+        static::updating(function ($product) {
+            if ($product->isDirty('name')) {
+                $product->slug = \Illuminate\Support\Str::slug($product->name);
+            }
+        });
+    }
+
+    public function averageRating()
+    {
+        return $this->reviews()->avg('rating') ?? 0;
+    }
 
     public function stores()
     {
@@ -28,32 +55,32 @@ class Product extends Model
         return $this->belongsToMany(User::class, 'product_user');
     }
 
-        public function category()
+    public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
-        public function images()
+    public function images()
     {
         return $this->hasMany(ProductImage::class);
     }
 
-        public function sizes()
+    public function sizes()
     {
         return $this->hasMany(ProductSize::class);
     }
 
-        public function reviews()
+    public function reviews()
     {
         return $this->hasMany(Review::class);
     }
 
-        public function orderItems()
+    public function orderItems()
     {
         return $this->hasMany(OrderItem::class);
     }
 
-        public function cartItems()
+    public function cartItems()
     {
         return $this->hasMany(CartItem::class);
     }
@@ -66,11 +93,6 @@ class Product extends Model
         public function primaryImage()
     {
         return $this->hasOne(ProductImage::class)->where('is_primary', true);
-    }
-
-        public function averageRating()
-    {
-        return $this->reviews()->avg('rating');
     }
     
 }

@@ -40,15 +40,55 @@
 
                             <div class="mb-4">
                                 <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
-                                    Location <span class="text-danger">*</span>
+                                    Address <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" name="location" value="{{ old('location', $store->location) }}" 
-                                    class="form-control py-2 @error('location') is-invalid @enderror" 
-                                    placeholder="e.g., Surabaya, East Java"
+                                <input type="text" name="address" value="{{ old('address', $store->address) }}" 
+                                    class="form-control py-2 @error('address') is-invalid @enderror" 
+                                    placeholder="123 Main St"
                                     style="border-color: #D4C4B0;">
-                                @error('location')
+                                @error('address')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
+                                    City <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" name="city" value="{{ old('city', $store->city) }}" 
+                                    class="form-control py-2 @error('city') is-invalid @enderror" 
+                                    placeholder="e.g., Surabaya"
+                                    style="border-color: #D4C4B0;">
+                                @error('city')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">Phone</label>
+                                        <input type="text" name="phone" value="{{ old('phone', $store->phone) }}" 
+                                            class="form-control py-2 @error('phone') is-invalid @enderror" 
+                                            placeholder="e.g., +62 812 3456 7890"
+                                            style="border-color: #D4C4B0;">
+                                        @error('phone')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">Email</label>
+                                        <input type="email" name="email" value="{{ old('email', $store->email) }}" 
+                                            class="form-control py-2 @error('email') is-invalid @enderror" 
+                                            placeholder="store@example.com"
+                                            style="border-color: #D4C4B0;">
+                                        @error('email')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="mb-4">

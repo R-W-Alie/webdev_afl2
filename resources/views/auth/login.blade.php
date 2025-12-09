@@ -13,7 +13,7 @@
             </div>
         @endif
 
-        <form method="POST" action="/login">
+        <form method="POST" action="{{ route('login.post') }}">
             @csrf
 
             <div class="mb-3">
@@ -21,6 +21,7 @@
                 <input 
                     type="email" 
                     name="email" 
+                    value="{{ old('email') }}"
                     class="form-control border border-secondary rounded-2" 
                     required
                 >
