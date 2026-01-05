@@ -68,6 +68,49 @@
                             @enderror
                         </div>
 
+                        <div class="mb-4">
+                            <h6 class="fw-normal mb-2" style="color: #5C4D3C; letter-spacing: 0.05em;">Default address for checkout</h6>
+                            <div class="mb-3">
+                                <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">Address line 1</label>
+                                <input type="text" name="address_line1" value="{{ old('address_line1', $defaultAddress->address_line1 ?? '') }}"
+                                    class="form-control py-2 @error('address_line1') is-invalid @enderror"
+                                    placeholder="Street, house number" style="border-color: #D4C4B0;">
+                                @error('address_line1')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">Address line 2</label>
+                                <input type="text" name="address_line2" value="{{ old('address_line2', $defaultAddress->address_line2 ?? '') }}"
+                                    class="form-control py-2 @error('address_line2') is-invalid @enderror"
+                                    placeholder="Apartment, suite, etc." style="border-color: #D4C4B0;">
+                                @error('address_line2')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">City</label>
+                                    <input type="text" name="city" value="{{ old('city', $defaultAddress->city ?? '') }}"
+                                        class="form-control py-2 @error('city') is-invalid @enderror"
+                                        placeholder="City" style="border-color: #D4C4B0;">
+                                    @error('city')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">Postal code</label>
+                                    <input type="text" name="postal_code" value="{{ old('postal_code', $defaultAddress->postal_code ?? '') }}"
+                                        class="form-control py-2 @error('postal_code') is-invalid @enderror"
+                                        placeholder="Postal code" style="border-color: #D4C4B0;">
+                                    @error('postal_code')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-text mt-2">Saved as your default shipping address for checkout.</div>
+                        </div>
+
                         <hr class="my-4" style="border-color: #D4C4B0;">
 
                         <h6 class="fw-normal mb-3" style="color: #5C4D3C; letter-spacing: 0.05em;">

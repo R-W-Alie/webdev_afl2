@@ -5,6 +5,7 @@ use App\Http\Controllers\StoreController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AddressController;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\User;
@@ -36,6 +37,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/cart/{product}', [CartController::class, 'remove'])->name('cart.remove');
     Route::post('/wishlist/{product}', [WishlistController::class, 'add'])->name('wishlist.add');
     Route::delete('/wishlist/{product}', [WishlistController::class, 'remove'])->name('wishlist.remove');
+
+    // Addresses
+    Route::get('/addresses', [AddressController::class, 'index'])->name('addresses.index');
+    Route::post('/addresses', [AddressController::class, 'store'])->name('addresses.store');
+    Route::put('/addresses/{address}', [AddressController::class, 'update'])->name('addresses.update');
+    Route::delete('/addresses/{address}', [AddressController::class, 'destroy'])->name('addresses.destroy');
+    Route::post('/addresses/{address}/default', [AddressController::class, 'makeDefault'])->name('addresses.makeDefault');
 
     // Checkout & Orders
     Route::get('/checkout', [\App\Http\Controllers\CheckoutController::class, 'show'])->name('checkout.show');
