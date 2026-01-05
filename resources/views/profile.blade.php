@@ -135,13 +135,16 @@
                         </p>
 
                         <!-- actions -->
-                        <div class="d-flex justify-content-center gap-2 mt-2">
-                            <a href="{{ route('profile.edit') }}" class="edit-profile-btn">
+                        <div class="d-flex flex-column flex-md-row justify-content-center gap-2 mt-3">
+                            <a href="{{ route('profile.edit') }}" class="edit-profile-btn text-center w-100" style="max-width: 180px;">
                                 Edit Profile
                             </a>
-                            <form method="POST" action="{{ route('logout') }}">
+                            <a href="{{ route('addresses.index') }}" class="edit-profile-btn text-center w-100" style="max-width: 180px; background-color:#2C2416; border-color:#2C2416;">
+                                Addresses
+                            </a>
+                            <form method="POST" action="{{ route('logout') }}" class="w-100" style="max-width: 180px;">
                                 @csrf
-                                <button type="submit" class="btn btn-outline-secondary edit-profile-btn">Logout</button>
+                                <button type="submit" class="edit-profile-btn w-100 text-center" style="background-color:#2C2416; border-color:#2C2416;">Logout</button>
                             </form>
                         </div>
                     </div>
