@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <!-- Filter & Search -->
+    <!-- filter search -->
     <div class="card shadow-sm mb-3" style="border:1px solid #D4C4B0;">
         <div class="card-body">
             <form method="GET" action="{{ route('admin.reviews.index') }}" class="row g-2 align-items-end">
@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    <!-- Reviews List -->
+    <!-- review -->
     <div class="card shadow-sm" style="border:1px solid #D4C4B0;">
         <div class="card-body p-0">
             @forelse($reviews as $review)

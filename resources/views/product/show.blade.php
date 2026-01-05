@@ -6,9 +6,9 @@
 
 @section('content')
 <div class="container py-5">
-    <!-- Product Details -->
+    <!-- prdct details -->
     <div class="row g-5 mb-5">
-        <!-- Image -->
+        <!-- img -->
         <div class="col-lg-6">
             @php
                 $primary = $product->primaryImage->image_url ?? $product->image ?? null;
@@ -18,7 +18,7 @@
                 <img src="{{ $primaryUrl }}" class="img-fluid rounded" alt="{{ $product->name }}" style="object-fit: cover; height: 500px; width: 100%;">
             @endif
 
-            <!-- Additional Images -->
+            <!-- + img -->
             @if($product->images->count() > 1)
                 <div class="row g-2 mt-3">
                     @foreach($product->images as $image)
@@ -33,7 +33,7 @@
             @endif
         </div>
 
-        <!-- Details -->
+        <!-- details -->
         <div class="col-lg-6">
             <h1 class="h3 text-uppercase fw-light mb-2" style="letter-spacing:0.2em; color:#2C2416;">{{ $product->name }}</h1>
             
@@ -65,12 +65,12 @@
                 </div>
             </div>
 
-            <!-- Description -->
+            <!-- desc -->
             <div class="mb-4 pb-4" style="border-bottom:1px solid #D4C4B0;">
                 <p class="text-muted" style="line-height: 1.8;">{{ $product->description }}</p>
             </div>
 
-            <!-- Sizes -->
+            <!-- sizes -->
             @if($product->sizes->count())
                 <div class="mb-4 pb-4" style="border-bottom:1px solid #D4C4B0;">
                     <h6 class="text-uppercase fw-light mb-3" style="letter-spacing:0.12em; color:#2C2416;">Available Sizes</h6>
@@ -84,7 +84,7 @@
                 </div>
             @endif
 
-            <!-- Actions -->
+            <!-- actions -->
             @auth
                 <div class="d-flex gap-2 mb-4">
                     <form method="POST" action="{{ route('cart.add', $product) }}" class="flex-grow-1">
@@ -109,7 +109,7 @@
                 </div>
             @endauth
 
-            <!-- Info Box -->
+            <!-- info -->
             <div class="p-3 rounded" style="background:#F5F1E8; border:1px solid #D4C4B0;">
                 <div class="small text-muted">
                     <i class="fa-solid fa-truck me-2" style="color:#8B7355;"></i>
@@ -119,7 +119,7 @@
         </div>
     </div>
 
-    <!-- Reviews Section -->
+    <!-- reviews -->
     <div class="row">
         <div class="col-lg-8">
             <h4 class="text-uppercase fw-light mb-4" style="letter-spacing:0.15em; color:#2C2416;">
@@ -145,7 +145,7 @@
                 </div>
             @endauth
 
-            <!-- Reviews List -->
+            <!-- review list -->
             @forelse($product->reviews->where('is_approved', true) as $review)
                 <div class="card shadow-sm mb-3" style="border:1px solid #D4C4B0;">
                     <div class="card-body p-4">

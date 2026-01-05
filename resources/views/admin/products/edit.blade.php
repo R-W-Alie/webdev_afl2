@@ -106,7 +106,40 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-
+                            <!-- size inven -->
+                            <div class="mb-4">
+                                <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
+                                    Size Inventory
+                                </label>
+                                <div class="table-responsive">
+                                    <table class="table table-sm" style="border:1px solid #D4C4B0;">
+                                        <thead style="background:#F5F1E8;">
+                                            <tr>
+                                                <th style="color:#5C4D3C;">Size</th>
+                                                <th style="color:#5C4D3C;">Stock</th>
+                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach(['XS', 'S', 'M', 'L', 'XL', 'XXL'] as $size)
+                                                @php
+                                                    $productSize = $product->sizes->firstWhere('size', $size);
+                                                @endphp
+                                                <tr>
+                                                    <td class="py-2">{{ $size }}</td>
+                                                    <td class="py-2">
+                                                        <input type="number" name="sizes[{{ $size }}]" 
+                                                            value="{{ $productSize->stock ?? 0 }}" 
+                                                            class="form-control form-control-sm" 
+                                                            placeholder="0"
+                                                            style="border-color: #D4C4B0; max-width:100px;">
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <small class="text-muted">Update stock for each available size</small>
+                            </div>
                             <!-- img -->
                             @if($product->image)
                                 <div class="mb-4">

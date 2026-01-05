@@ -144,6 +144,16 @@ class ProductController extends Controller
 
         $product->update($validated);
 
+        // Update size inventory
+        if ($request->has('sizes')) {
+            foreach ($request->input('sizes', []) as $size => $stock) {
+                $product->sizes()->updateOrCreate(
+                    ['size' => $size],
+                    ['stock' => max(0, intval($stock))]
+                );
+            }
+        }
+
         return redirect()->route('admin.products.index')
             ->with('success', 'Product updated successfully!');
     }

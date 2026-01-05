@@ -19,7 +19,7 @@ class ReviewController extends Controller
     {
         $user = Auth::user();
 
-        // Check if user purchased this product
+        // check kl user purchased this product
         $hasPurchased = Order::where('user_id', $user->id)
             ->whereHas('items', fn($q) => $q->where('product_id', $product->id))
             ->exists();
@@ -28,7 +28,7 @@ class ReviewController extends Controller
             return back()->with('error', 'You can only review products you have purchased.');
         }
 
-        // Check if user already reviewed this product
+        // check if user alrdy reviewed this product
         $existingReview = Review::where('user_id', $user->id)
             ->where('product_id', $product->id)
             ->first();
@@ -47,7 +47,7 @@ class ReviewController extends Controller
             'user_id' => $user->id,
             'rating' => $validated['rating'],
             'comment' => $validated['comment'],
-            'is_approved' => false, // Pending admin approval
+            'is_approved' => false, // wait admin approval
         ]);
 
         return redirect()->route('products.show', $product->slug)
