@@ -43,31 +43,11 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        $product2 = Product::updateOrCreate(
-            ['name' => 'Iris Sculpt'],
-            [
-                'category_id' => $categories->first()->id,
-                'slug' => 'iris-sculpt',
-                'description' => 'Contoured fit with breathable stretch fabric for all-day comfort.',
-                'price' => 189000,
-                'stock_quantity' => 8,
-                'is_featured' => false,
-            ]
-        );
-
         // MAIN IMG
         $product1->images()->updateOrCreate(
             ['is_primary' => true, 'product_id' => $product1->id],
             [
                 'image_url' => 'products/orielleform-white1.jpeg',
-                'order' => 0,
-            ]
-        );
-
-        $product2->images()->updateOrCreate(
-            ['is_primary' => true, 'product_id' => $product2->id],
-            [
-                'image_url' => 'products/irissculpt.png',
                 'order' => 0,
             ]
         );

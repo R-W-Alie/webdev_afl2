@@ -6,7 +6,6 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AddressController;
-use App\Http\Controllers\StripeWebhookController;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\User;
@@ -139,5 +138,3 @@ Route::get('/', function () {
 
 Route::get('/store', [StoreController::class, 'index'])->name('store.index');
 Route::get('/product/{slug}', [ProductController::class, 'show'])->name('products.show');
-
-Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle']);

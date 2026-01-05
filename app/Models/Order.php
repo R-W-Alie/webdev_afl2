@@ -13,9 +13,6 @@ class Order extends Model
         'total_amount',
         'status',
         'notes',
-        'payment_session_id',
-        'payment_status',
-        'paid_at',
     ];
 
     protected $casts = [
