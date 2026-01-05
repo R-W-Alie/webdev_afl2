@@ -17,7 +17,7 @@
         <div class="col-md-6">
             <h1 class="mb-3">{{ $product->name }}</h1>
             <p class="text-muted">{{ $product->category->name ?? '' }}</p>
-            <p class="lead">${{ number_format($product->price, 2) }}</p>
+            <p class="lead">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
             <p>{{ $product->description }}</p>
             <p class="mb-1">Average rating: {{ number_format($product->averageRating(), 1) }}/5</p>
             <p class="mb-4">Stock: {{ $product->stock_quantity }}</p>

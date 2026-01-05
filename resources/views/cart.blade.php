@@ -47,8 +47,10 @@
         @endforeach
     </div>
     <div class="mt-4 d-flex justify-content-between align-items-center">
-        <div class="fw-normal" style="color:#2C2416;">Total: ${{ number_format($total, 2) }}</div>
-        <a href="#" class="btn btn-dark" style="background:#2C2416; border-color:#2C2416;">Checkout</a>
+        <div class="fw-normal" style="color:#2C2416;">Total: Rp {{ number_format($total, 0, ',', '.') }}</div>
+        <a href="{{ route('checkout.show') }}" class="btn btn-dark" style="background:#2C2416; border-color:#2C2416;">
+            <i class="fa-solid fa-credit-card me-2"></i>Checkout
+        </a>
     </div>
     @endif
 </div>

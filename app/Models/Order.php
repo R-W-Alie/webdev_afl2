@@ -12,6 +12,7 @@ class Order extends Model
         'order_number',
         'total_amount',
         'status',
+        'notes',
     ];
 
     protected $casts = [

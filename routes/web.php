@@ -25,6 +25,8 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     // cart & wishlist
@@ -34,6 +36,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/cart/{product}', [CartController::class, 'remove'])->name('cart.remove');
     Route::post('/wishlist/{product}', [WishlistController::class, 'add'])->name('wishlist.add');
     Route::delete('/wishlist/{product}', [WishlistController::class, 'remove'])->name('wishlist.remove');
+
+    // Checkout & Orders
+    Route::get('/checkout', [\App\Http\Controllers\CheckoutController::class, 'show'])->name('checkout.show');
+    Route::post('/checkout', [\App\Http\Controllers\CheckoutController::class, 'store'])->name('checkout.store');
+    Route::get('/orders', [\App\Http\Controllers\OrderController::class, 'history'])->name('orders.history');
+    Route::get('/orders/{order}', [\App\Http\Controllers\OrderController::class, 'details'])->name('order.details');
+    Route::get('/orders/{order}/confirmation', [\App\Http\Controllers\OrderController::class, 'confirmation'])->name('order.confirmation');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {

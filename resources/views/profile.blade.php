@@ -136,7 +136,7 @@
 
                         <!-- actions -->
                         <div class="d-flex justify-content-center gap-2 mt-2">
-                            <a href="#" class="edit-profile-btn">
+                            <a href="{{ route('profile.edit') }}" class="edit-profile-btn">
                                 Edit Profile
                             </a>
                             <form method="POST" action="{{ route('logout') }}">
