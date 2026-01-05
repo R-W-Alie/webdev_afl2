@@ -26,7 +26,7 @@
                         <form method="POST" action="{{ route('admin.products.store') }}" enctype="multipart/form-data">
                             @csrf
 
-               
+
                             <div class="mb-4">
                                 <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
                                     Product Name <span class="text-danger">*</span>
@@ -39,7 +39,7 @@
                                 @enderror
                             </div>
 
-        
+
                             <div class="mb-4">
                                 <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
                                     Description <span class="text-danger">*</span>
@@ -60,50 +60,52 @@
                                     class="form-control py-2 @error('price') is-invalid @enderror" placeholder="0"
                                     style="border-color: #D4C4B0;">
                                 @error('price')
-                                                                <!-- Category -->
-                                                                <div class="mb-4">
-                                                                    <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
-                                                                        Category <span class="text-danger">*</span>
-                                                                    </label>
-                                                                    <select name="category_id" class="form-control @error('category_id') is-invalid @enderror" style="border-color: #D4C4B0;">
-                                                                        <option value="">Select a category</option>
-                                                                        @foreach(\App\Models\Category::all() as $cat)
-                                                                            <option value="{{ $cat->id }}" @selected(old('category_id') == $cat->id)>{{ $cat->name }}</option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                    @error('category_id')
-                                                                        <div class="invalid-feedback d-block">{{ $message }}</div>
-                                                                    @enderror
-                                                                </div>
-
-                                                                <!-- Stock Quantity -->
-                                                                <div class="mb-4">
-                                                                    <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
-                                                                        Stock Quantity <span class="text-danger">*</span>
-                                                                    </label>
-                                                                    <input type="number" name="stock_quantity" value="{{ old('stock_quantity') }}"
-                                                                        class="form-control py-2 @error('stock_quantity') is-invalid @enderror" placeholder="0"
-                                                                        style="border-color: #D4C4B0;">
-                                                                    @error('stock_quantity')
-                                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                                    @enderror
-                                                                </div>
-
-                                                                <!-- Featured -->
-                                                                <div class="mb-4 form-check">
-                                                                    <input type="checkbox" name="is_featured" value="1" class="form-check-input" 
-                                                                        id="isFeatured" @checked(old('is_featured'))
-                                                                        style="border-color: #D4C4B0;">
-                                                                    <label class="form-check-label" for="isFeatured" style="color: #5C4D3C; letter-spacing: 0.05em;">
-                                                                        Mark as Featured
-                                                                    </label>
-                                                                </div>
-
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
+                                <!-- Category -->
+                                <div class="mb-4">
+                                    <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
+                                        Category <span class="text-danger">*</span>
+                                    </label>
+                                    <select name="category_id"
+                                        class="form-control @error('category_id') is-invalid @enderror"
+                                        style="border-color: #D4C4B0;">
+                                        <option value="">Select a category</option>
+                                        @foreach (\App\Models\Category::all() as $cat)
+                                            <option value="{{ $cat->id }}" @selected(old('category_id') == $cat->id)>
+                                                {{ $cat->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('category_id')
+                                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <!-- Stock Quantity -->
+                                <div class="mb-4">
+                                    <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
+                                        Stock Quantity <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="number" name="stock_quantity" value="{{ old('stock_quantity') }}"
+                                        class="form-control py-2 @error('stock_quantity') is-invalid @enderror"
+                                        placeholder="0" style="border-color: #D4C4B0;">
+                                    @error('stock_quantity')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <!-- Featured -->
+                                <div class="mb-4 form-check">
+                                    <input type="checkbox" name="is_featured" value="1" class="form-check-input"
+                                        id="isFeatured" @checked(old('is_featured')) style="border-color: #D4C4B0;">
+                                    <label class="form-check-label" for="isFeatured"
+                                        style="color: #5C4D3C; letter-spacing: 0.05em;">
+                                        Mark as Featured
+                                    </label>
+                                </div>
                             </div>
 
-                  
+
                             <div class="mb-4">
                                 <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
                                     Product Image
@@ -125,10 +127,12 @@
 
                             <!-- Buttons -->
                             <div class="d-flex gap-2 pt-3">
-                                <button type="submit" class="btn btn-dark px-4" style="background:#2C2416; border-color:#2C2416; letter-spacing:0.05em;">
+                                <button type="submit" class="btn btn-dark px-4"
+                                    style="background:#2C2416; border-color:#2C2416; letter-spacing:0.05em;">
                                     <i class="fa-solid fa-check me-2"></i>Create Product
                                 </button>
-                                <a href="{{ route('admin.products.index') }}" class="btn btn-outline-secondary px-4" style="border-color:#D4C4B0; color:#5C4D3C;">
+                                <a href="{{ route('admin.products.index') }}" class="btn btn-outline-secondary px-4"
+                                    style="border-color:#D4C4B0; color:#5C4D3C;">
                                     Cancel
                                 </a>
                             </div>
@@ -137,7 +141,7 @@
                 </div>
             </div>
 
-           
+
             <div class="col-lg-4">
                 <div class="card shadow-sm">
                     <div class="card-body">
