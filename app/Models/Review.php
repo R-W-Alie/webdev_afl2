@@ -11,6 +11,13 @@ class Review extends Model
         'user_id',
         'rating',
         'comment',
+        'is_approved',
+        'rejected_at',
+    ];
+
+    protected $casts = [
+        'is_approved' => 'boolean',
+        'rejected_at' => 'datetime',
     ];
 
     public function product()

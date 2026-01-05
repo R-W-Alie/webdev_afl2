@@ -63,6 +63,46 @@
                                     placeholder="0"
                                     style="border-color: #D4C4B0;">
                                 @error('price')
+                                                                <!-- category -->
+                                                                <div class="mb-4">
+                                                                    <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
+                                                                        Category <span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <select name="category_id" class="form-control @error('category_id') is-invalid @enderror" style="border-color: #D4C4B0;">
+                                                                        <option value="">Select a category</option>
+                                                                        @foreach(\App\Models\Category::all() as $cat)
+                                                                            <option value="{{ $cat->id }}" @selected(old('category_id', $product->category_id) == $cat->id)>{{ $cat->name }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                    @error('category_id')
+                                                                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                                    @enderror
+                                                                </div>
+
+                                                                <!-- stock quantity -->
+                                                                <div class="mb-4">
+                                                                    <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
+                                                                        Stock Quantity <span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <input type="number" name="stock_quantity" value="{{ old('stock_quantity', $product->stock_quantity) }}" 
+                                                                        class="form-control py-2 @error('stock_quantity') is-invalid @enderror" 
+                                                                        placeholder="0"
+                                                                        style="border-color: #D4C4B0;">
+                                                                    @error('stock_quantity')
+                                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                                    @enderror
+                                                                </div>
+
+                                                                <!-- featured -->
+                                                                <div class="mb-4 form-check">
+                                                                    <input type="checkbox" name="is_featured" value="1" class="form-check-input" 
+                                                                        id="isFeatured" @checked(old('is_featured', $product->is_featured))
+                                                                        style="border-color: #D4C4B0;">
+                                                                    <label class="form-check-label" for="isFeatured" style="color: #5C4D3C; letter-spacing: 0.05em;">
+                                                                        Mark as Featured
+                                                                    </label>
+                                                                </div>
+
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

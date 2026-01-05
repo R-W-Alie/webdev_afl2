@@ -43,6 +43,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/orders', [\App\Http\Controllers\OrderController::class, 'history'])->name('orders.history');
     Route::get('/orders/{order}', [\App\Http\Controllers\OrderController::class, 'details'])->name('order.details');
     Route::get('/orders/{order}/confirmation', [\App\Http\Controllers\OrderController::class, 'confirmation'])->name('order.confirmation');
+
+    // Reviews
+    Route::get('/products/{product}/review', [\App\Http\Controllers\ReviewController::class, 'showForm'])->name('review-form');
+    Route::post('/products/{product}/review', [\App\Http\Controllers\ReviewController::class, 'store'])->name('review.store');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -104,6 +108,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
             ->appends(['q' => $q]);
         return view('admin.customers.index', compact('customers', 'q'));
     })->name('customers.index');
+
+    Route::get('/reviews', [\App\Http\Controllers\ReviewController::class, 'adminIndex'])->name('reviews.index');
+    Route::post('/reviews/{review}/approve', [\App\Http\Controllers\ReviewController::class, 'approve'])->name('reviews.approve');
+    Route::post('/reviews/{review}/reject', [\App\Http\Controllers\ReviewController::class, 'reject'])->name('reviews.reject');
+    Route::delete('/reviews/{review}', [\App\Http\Controllers\ReviewController::class, 'destroy'])->name('reviews.destroy');
 });
 
 Route::get('/', function () {

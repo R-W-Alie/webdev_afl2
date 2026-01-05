@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // Add primary image
+        // MAIN IMG
         $product1->images()->updateOrCreate(
             ['is_primary' => true, 'product_id' => $product1->id],
             [
@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // Add additional images
+        // more img
         $product1->images()->updateOrCreate(
             ['product_id' => $product1->id, 'order' => 1],
             [
@@ -72,7 +72,6 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // Create customer test account
         $customer = User::updateOrCreate(
             ['email' => 'customer@test.com'],
             [
