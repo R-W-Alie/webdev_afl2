@@ -20,7 +20,10 @@ class StoreFactory extends Factory
             'name' => $this->faker->company(),
             'image' => 'https://picsum.photos/400?random='.$this->faker->unique()->numberBetween(1, 100),
             'description' => $this->faker->sentence(10),
-            'location' => $this->faker->city(),
+            'address' => $this->faker->streetAddress(),
+            'city' => $this->faker->city(),
+            'phone' => $this->faker->phoneNumber(),
+            'email' => $this->faker->companyEmail(),
         ];  
     }
 }

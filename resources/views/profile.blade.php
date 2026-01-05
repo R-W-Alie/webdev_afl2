@@ -98,29 +98,12 @@
         border-radius: 6px;
         text-decoration: none;
         display: inline-block;
-        margin-bottom: 20px;
     }
 
     .edit-profile-btn:hover {
         background-color: #8B7355;
         border-color: #8B7355;
         color: white;
-    }
-
-    .btn-delete {
-        background-color: #8B0000;
-        border: none;
-        padding: 11px 28px;
-        color: white;
-        font-size: 0.85rem;
-        text-transform: uppercase;
-        border-radius: 8px;
-        letter-spacing: 0.1em;
-        transition: 0.3s ease;
-    }
-
-    .btn-delete:hover {
-        background-color: #B30000;
     }
 </style>
 @endsection
@@ -130,39 +113,38 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12">
-                <div class="profile-card p-5 text-center">
+                <div class="profile-card p-5">
+                    <div class="text-center">
+                        <!-- pfp -->
+                        <div class="profile-avatar">
+                            {{ strtoupper(substr($user->name, 0, 1)) }}
+                        </div>
 
-                    <div class="profile-avatar">
-                        {{ strtoupper(substr($user->name, 0, 1)) }}
+                        <!-- name -->
+                        <h3 class="profile-name">{{ $user->name }}</h3>
+                        
+                        <!-- email -->
+                        <p class="profile-email">{{ $user->email }}</p>
+
+                        <!-- divider -->
+                        <div class="profile-divider"></div>
+
+                        <!-- since when -->
+                        <p class="profile-meta mb-4">
+                            Member since {{ $user->created_at->format('F Y') }}
+                        </p>
+
+                        <!-- actions -->
+                        <div class="d-flex justify-content-center gap-2 mt-2">
+                            <a href="{{ route('profile.edit') }}" class="edit-profile-btn">
+                                Edit Profile
+                            </a>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="btn btn-outline-secondary edit-profile-btn">Logout</button>
+                            </form>
+                        </div>
                     </div>
-
-                    <h3 class="profile-name">{{ $user->name }}</h3>
-                    <p class="profile-email">{{ $user->email }}</p>
-
-                    <div class="profile-divider"></div>
-
-                    <div class="profile-info-item">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <span>{{ $user->location ?? 'Location not set' }}</span>
-                    </div>
-
-                    <p class="profile-meta mb-4">
-                        Member since {{ $user->created_at->format('F Y') }}
-                    </p>
-
-                    <a href="{{ route('profile.edit') }}" class="edit-profile-btn">
-                        Edit Profile
-                    </a>
-
-                    {{-- DELETE ACCOUNT --}}
-                    <form action="{{ route('profile.delete') }}" method="POST"
-                        onsubmit="return confirm('Are you sure you want to permanently delete your account?');">
-                        @csrf
-                        @method('DELETE')
-
-                        <button class="btn-delete">Delete Account</button>
-                    </form>
-
                 </div>
             </div>
         </div>

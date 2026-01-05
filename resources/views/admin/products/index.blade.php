@@ -1,18 +1,15 @@
-@extends('layout.admin')
+@extends('layout.main')
 
-@section('title', 'Manage Products')
+@section('title', 'Manage Products - KEL & CO')
 
 @section('content')
-    <div class="container-fluid">
-        
-        <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="container py-5">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
             <div>
-                <h1 class="display-6 fw-light text-uppercase mb-2 text-dark" style="letter-spacing: 0.15em;">
-                    Manage Products
-                </h1>
-                <p class="text-muted mb-0">Create, edit, and manage your product catalog</p>
+                <h1 class="h3 text-uppercase fw-light mb-1" style="letter-spacing:0.2em; color:#2C2416;">Manage Products</h1>
+                <div class="text-muted small" style="letter-spacing:0.05em;">Create, edit, and manage your product catalog</div>
             </div>
-            <a href="{{ route('admin.products.create') }}" class="btn btn-primary-custom px-4 py-2">
+            <a href="{{ route('admin.products.create') }}" class="btn btn-dark" style="background:#2C2416; border-color:#2C2416; letter-spacing:0.05em;">
                 <i class="fa-solid fa-plus me-2"></i>Add Product
             </a>
         </div>
@@ -53,7 +50,7 @@
                                     ({{ $products->total() }} {{ Str::plural('product', $products->total()) }} found)
                                 </span>
                             </span>
-                            <a href="{{ route('admin.products.index') }}" class="btn btn-sm btn-outline-custom">
+                            <a href="{{ route('admin.products.index') }}" class="btn btn-sm btn-outline-secondary" style="border-color:#D4C4B0; color:#5C4D3C;">
                                 Clear
                             </a>
                         </div>

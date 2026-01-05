@@ -12,7 +12,10 @@ class Store extends Model
         'name',
         'image',
         'description',
-        'location',
+        'address',
+        'city',
+        'phone',
+        'email',
     ];
 
     public function products()

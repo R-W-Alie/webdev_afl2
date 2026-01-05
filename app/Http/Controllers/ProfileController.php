@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -15,7 +16,6 @@ class ProfileController extends Controller
 
     public function index()
     {
-        // Ambil user yang sedang login
         $user = Auth::user();
         return view('profile', compact('user'));
     }
@@ -30,39 +30,23 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'location' => 'nullable|string',
-            'password' => 'nullable|min:6'
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'phone' => 'nullable|string|max:20',
+            'password' => 'nullable|min:8|confirmed',
         ]);
 
-        // Update data dasar
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->location = $request->location;
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->phone = $validated['phone'] ?? $user->phone;
 
-        // Update password jika diisi
-        if ($request->password) {
-            $user->password = bcrypt($request->password);
+        if (!empty($validated['password'])) {
+            $user->password = Hash::make($validated['password']);
         }
 
         $user->save();
 
-        return redirect()->route('profile')
-            ->with('success', 'Profile updated successfully!');
-    }
-
-    public function destroy()
-    {
-        $user = Auth::user();
-
-        // logout sebelum delete
-        Auth::logout();
-
-        $user->delete();
-
-        return redirect('/')
-            ->with('success', 'Your account has been deleted.');
+        return redirect()->route('profile')->with('success', 'Profile updated successfully!');
     }
 }

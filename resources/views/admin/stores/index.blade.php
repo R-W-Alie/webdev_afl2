@@ -1,17 +1,19 @@
-@extends('layout.admin')
+@extends('layout.main')
 
-@section('title', 'Manage Stores')
+@php use Illuminate\Support\Str; @endphp
+
+@section('title', 'Manage Stores - KEL & CO')
 
 @section('content')
-    <div class="container-fluid">
-        <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="container py-5">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
             <div>
-                <h1 class="display-6 fw-light text-uppercase mb-2 text-dark" style="letter-spacing: 0.15em;">
+                <h1 class="h3 text-uppercase fw-light mb-1" style="letter-spacing:0.2em; color:#2C2416;">
                     Manage Stores
                 </h1>
-                <p class="text-muted mb-0">Create, edit, and manage your store locations</p>
+                <div class="text-muted small" style="letter-spacing:0.05em;">Create, edit, and manage your store locations</div>
             </div>
-            <a href="{{ route('admin.stores.create') }}" class="btn btn-primary-custom px-4 py-2">
+            <a href="{{ route('admin.stores.create') }}" class="btn btn-dark" style="background:#2C2416; border-color:#2C2416; letter-spacing:0.05em;">
                 <i class="fa-solid fa-plus me-2"></i>Add Store
             </a>
         </div>
@@ -49,7 +51,7 @@
                                     ({{ $stores->total() }} {{ Str::plural('store', $stores->total()) }} found)
                                 </span>
                             </span>
-                            <a href="{{ route('admin.stores.index') }}" class="btn btn-sm btn-outline-custom">
+                            <a href="{{ route('admin.stores.index') }}" class="btn btn-sm btn-outline-secondary" style="border-color:#D4C4B0; color:#5C4D3C;">
                                 Clear
                             </a>
                         </div>
@@ -66,7 +68,8 @@
                             <tr>
                                 <th class="py-3 px-4" style="color: #5C4D3C; letter-spacing: 0.05em;">Image</th>
                                 <th class="py-3 px-4" style="color: #5C4D3C; letter-spacing: 0.05em;">Store Name</th>
-                                <th class="py-3 px-4" style="color: #5C4D3C; letter-spacing: 0.05em;">Location</th>
+                                <th class="py-3 px-4" style="color: #5C4D3C; letter-spacing: 0.05em;">City</th>
+                                <th class="py-3 px-4" style="color: #5C4D3C; letter-spacing: 0.05em;">Contact</th>
                                 <th class="py-3 px-4" style="color: #5C4D3C; letter-spacing: 0.05em;">Description</th>
                                 <th class="py-3 px-4 text-end" style="color: #5C4D3C; letter-spacing: 0.05em;">Actions</th>
                             </tr>
@@ -94,8 +97,13 @@
                                     </td>
                                     <td class="py-3 px-4">
                                         <span class="small" style="color: #8B7355;">
-                                            <i class="fa-solid fa-location-dot me-1"></i>{{ $store->location }}
+                                            <i class="fa-solid fa-location-dot me-1"></i>{{ $store->city }}
                                         </span>
+                                        <div class="small text-muted">{{ Str::limit($store->address, 40) }}</div>
+                                    </td>
+                                    <td class="py-3 px-4">
+                                        <div class="small" style="color: #2C2416;">{{ $store->phone ?? '-' }}</div>
+                                        <div class="small text-muted">{{ $store->email ?? '' }}</div>
                                     </td>
                                     <td class="py-3 px-4">
                                         <span class="small text-muted">

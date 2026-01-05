@@ -2,106 +2,111 @@
 
 @section('title', 'Edit Profile - Kel & Co')
 
-@section('styles')
-<style>
-    .edit-section {
-        min-height: 75vh;
-        display: flex;
-        align-items: center;
-        padding: 80px 0;
-    }
-
-    .edit-card {
-        background-color: white;
-        border-radius: 16px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        max-width: 550px;
-        margin: 0 auto;
-        padding: 40px 45px;
-    }
-
-    .form-label {
-        font-weight: 500;
-        color: #5C4D3C;
-    }
-
-    .form-control {
-        border-radius: 10px;
-        border: 1px solid #C9B8A3;
-        padding: 10px 14px;
-    }
-
-    .btn-save {
-        background-color: #2C2416;
-        border: 1px solid #2C2416;
-        color: white;
-        padding: 12px 32px;
-        border-radius: 8px;
-        transition: 0.3s ease;
-        letter-spacing: 0.1em;
-    }
-
-    .btn-save:hover {
-        background-color: #8B7355;
-        border-color: #8B7355;
-    }
-
-    .btn-cancel {
-        border: 1px solid #2C2416;
-        padding: 12px 32px;
-        border-radius: 8px;
-        color: #2C2416;
-        background: transparent;
-        transition: 0.3s ease;
-        letter-spacing: 0.1em;
-    }
-
-    .btn-cancel:hover {
-        background-color: #C9B8A3;
-        color: white;
-        border-color: #C9B8A3;
-    }
-</style>
-@endsection
-
 @section('content')
-<div class="edit-section">
-    <div class="container">
-        <div class="edit-card">
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="mb-4">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('profile') }}" style="color: #8B7355;">Profile</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit</li>
+                    </ol>
+                </nav>
+                <h1 class="h3 text-uppercase fw-light mb-1" style="letter-spacing:0.2em; color:#2C2416;">
+                    Edit Profile
+                </h1>
+                <div class="text-muted small" style="letter-spacing:0.05em;">Update your account information</div>
+            </div>
 
-            <h3 class="text-center mb-4">Edit Profile</h3>
-
-            <form action="{{ route('profile.update') }}" method="POST">
-                @csrf
-
-                <div class="mb-3">
-                    <label class="form-label">Full Name</label>
-                    <input type="text" name="name" class="form-control" value="{{ $user->name }}" required>
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert" style="border-left: 4px solid #8B7355;">
+                    <i class="fa-solid fa-circle-check me-2"></i>{{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
+            @endif
 
-                <div class="mb-3">
-                    <label class="form-label">Email Address</label>
-                    <input type="email" name="email" class="form-control" value="{{ $user->email }}" required>
+            <div class="card shadow-sm" style="border:1px solid #D4C4B0;">
+                <div class="card-body p-4">
+                    <form method="POST" action="{{ route('profile.update') }}">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="mb-4">
+                            <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
+                                Name <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" name="name" value="{{ old('name', $user->name) }}"
+                                class="form-control py-2 @error('name') is-invalid @enderror"
+                                placeholder="Enter your name" style="border-color: #D4C4B0;">
+                            @error('name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
+                                Email <span class="text-danger">*</span>
+                            </label>
+                            <input type="email" name="email" value="{{ old('email', $user->email) }}"
+                                class="form-control py-2 @error('email') is-invalid @enderror"
+                                placeholder="Enter your email" style="border-color: #D4C4B0;">
+                            @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
+                                Phone
+                            </label>
+                            <input type="text" name="phone" value="{{ old('phone', $user->phone) }}"
+                                class="form-control py-2 @error('phone') is-invalid @enderror"
+                                placeholder="Enter your phone number" style="border-color: #D4C4B0;">
+                            @error('phone')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <hr class="my-4" style="border-color: #D4C4B0;">
+
+                        <h6 class="fw-normal mb-3" style="color: #5C4D3C; letter-spacing: 0.05em;">
+                            Change Password (optional)
+                        </h6>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
+                                New Password
+                            </label>
+                            <input type="password" name="password"
+                                class="form-control py-2 @error('password') is-invalid @enderror"
+                                placeholder="Leave blank to keep current password" style="border-color: #D4C4B0;">
+                            @error('password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            <div class="form-text">Minimum 8 characters</div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
+                                Confirm New Password
+                            </label>
+                            <input type="password" name="password_confirmation"
+                                class="form-control py-2"
+                                placeholder="Confirm new password" style="border-color: #D4C4B0;">
+                        </div>
+
+                        <div class="d-flex gap-2 pt-3">
+                            <button type="submit" class="btn btn-dark px-4" style="background:#2C2416; border-color:#2C2416; letter-spacing:0.05em;">
+                                <i class="fa-solid fa-check me-2"></i>Save Changes
+                            </button>
+                            <a href="{{ route('profile') }}" class="btn btn-outline-secondary px-4" style="border-color:#D4C4B0; color:#5C4D3C;">
+                                Cancel
+                            </a>
+                        </div>
+                    </form>
                 </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Location</label>
-                    <input type="text" name="location" class="form-control" value="{{ $user->location }}">
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">
-                        New Password <span class="text-muted">(optional)</span>
-                    </label>
-                    <input type="password" name="password" class="form-control" placeholder="Leave blank if not changing">
-                </div>
-
-                <div class="d-flex justify-content-between mt-4">
-                    <a href="{{ route('profile') }}" class="btn-cancel">Cancel</a>
-                    <button class="btn-save">Save Changes</button>
-                </div>
-            </form>
-
+            </div>
         </div>
     </div>
 </div>

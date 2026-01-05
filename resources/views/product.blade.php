@@ -1,10 +1,11 @@
 @extends('layout.main')
 
+@php use Illuminate\Support\Str; @endphp
+
 @section('title', 'Our Products - Kel & Co')
 
 @section('content')
     <div class="container my-5 py-5">
-        <!-- Header -->
         <div class="text-center mb-5">
             <h1 class="display-4 fw-light text-uppercase mb-4 text-dark" style="letter-spacing: 0.15em;">
                 Our Products
@@ -12,11 +13,10 @@
             <hr class="mx-auto opacity-75" style="width: 80px; height: 1px; background-color: #8B7355;">
         </div>
 
-        <!-- Search Bar -->
-        <div class="row justify-content-center mb-5">
-            <div class="col-lg-6">
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-8 col-xl-7">
                 <form action="{{ url()->current() }}" method="GET">
-                    <div class="input-group shadow-sm rounded">
+                    <div class="input-group shadow-sm rounded mb-3">
                         <input type="text" class="form-control py-3 border-end-0 bg-white" name="search"
                             placeholder="Search our products" value="{{ request('search') }}"
                             style="border-color: #d4c4b0;">
@@ -29,11 +29,33 @@
                             </svg>
                         </button>
                     </div>
+
+                    <div class="row g-3 align-items-center">
+                        <div class="col-md-6">
+                            <select name="category" class="form-select" style="border-color: #d4c4b0;">
+                                <option value="">All Categories</option>
+                                @foreach($categories ?? [] as $cat)
+                                    <option value="{{ $cat->id }}" @selected(request('category') == $cat->id)>{{ $cat->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <select name="sort" class="form-select" style="border-color: #d4c4b0;">
+                                <option value="newest" @selected(request('sort','newest')==='newest')>Newest</option>
+                                <option value="price_asc" @selected(request('sort')==='price_asc')>Price: Low to High</option>
+                                <option value="price_desc" @selected(request('sort')==='price_desc')>Price: High to Low</option>
+                                <option value="name" @selected(request('sort')==='name')>Name A-Z</option>
+                            </select>
+                        </div>
+                        <div class="col-12 d-flex gap-2 justify-content-center">
+                            <button class="btn btn-dark px-4" style="background-color:#2C2416; border-color:#2C2416;">Apply</button>
+                            <a href="{{ url()->current() }}" class="btn btn-outline-secondary px-4" style="border-color:#d4c4b0; color:#5C4D3C;">Reset</a>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
 
-        <!-- Search Results Info -->
         @if (request('search'))
             <div class="row justify-content-center mb-4">
                 <div class="col-12">
@@ -55,19 +77,74 @@
             </div>
         @endif
 
-        <!-- Products Grid -->
+        @if(!empty($featuredProducts) && $featuredProducts->count())
+            <div class="mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="fw-light text-uppercase mb-0" style="letter-spacing:0.12em; color:#2C2416;">Featured Picks</h5>
+                    <span class="small text-muted">Curated highlights</span>
+                </div>
+                <div class="row g-3">
+                    @foreach($featuredProducts as $featured)
+                        @php
+                            $thumb = $featured->primaryImage->image_url ?? $featured->image ?? null;
+                            $thumbUrl = $thumb ? (Str::startsWith($thumb, ['http://', 'https://']) ? $thumb : asset('storage/'.$thumb)) : null;
+                        @endphp
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <a href="{{ route('products.show', $featured->slug) }}" class="text-decoration-none text-dark">
+                                <div class="card border-0 shadow-sm h-100">
+                                    @if($thumbUrl)
+                                        <img src="{{ $thumbUrl }}" class="card-img-top" alt="{{ $featured->name }}" style="height:200px; object-fit:cover;">
+                                    @else
+                                        <div class="bg-light" style="height:200px;"></div>
+                                    @endif
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center gap-2 mb-2">
+                                            <span class="badge bg-dark">Featured</span>
+                                            @if($featured->stock_quantity <= 3)
+                                                <span class="badge bg-warning text-dark">Low stock</span>
+                                            @endif
+                                        </div>
+                                        <div class="small text-muted mb-1">{{ $featured->category->name ?? 'Uncategorized' }}</div>
+                                        <h6 class="mb-1">{{ $featured->name }}</h6>
+                                        <p class="fw-normal mb-0" style="color:#8b7355;">Rp {{ number_format($featured->price, 0, ',', '.') }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        @endif
+
         <div class="row g-4">
             @forelse ($products as $product)
                 <div class="col-md-6 col-lg-4">
                     <div class="card border-0 shadow-sm h-100">
                         <div class="overflow-hidden">
-                            <img src="{{ $product->image }}" class="card-img-top" alt="{{ $product->name }}"
+                            @php
+                                $thumb = $product->primaryImage->image_url ?? $product->image ?? null;
+                                $thumbUrl = $thumb ? (Str::startsWith($thumb, ['http://', 'https://']) ? $thumb : asset('storage/'.$thumb)) : null;
+                            @endphp
+                            @if($thumbUrl)
+                            <img src="{{ $thumbUrl }}" class="card-img-top" alt="{{ $product->name }}"
                                 style="height: 280px; object-fit: cover;">
+                            @else
+                            <div class="bg-light" style="height: 280px;"></div>
+                            @endif
                         </div>
                         <div class="card-body d-flex flex-column">
+                            <div class="d-flex align-items-center gap-2 mb-2">
+                                @if($product->is_featured)
+                                    <span class="badge bg-dark">Featured</span>
+                                @endif
+                                @if($product->stock_quantity <= 3)
+                                    <span class="badge bg-warning text-dark">Low stock</span>
+                                @endif
+                            </div>
                             <h5 class="fw-normal mb-2 text-dark" style="letter-spacing: 0.05em;">
-                                {{ $product->name }}
+                                <a href="{{ route('products.show', $product->slug) }}" class="text-decoration-none text-dark">{{ $product->name }}</a>
                             </h5>
+                            <div class="small text-muted mb-2">{{ $product->category->name ?? 'Uncategorized' }}</div>
                             <p class="small mb-3 lh-base" style="color: #5C4D3C;">
                                 {{ $product->description }}
                             </p>
@@ -94,7 +171,6 @@
             @endforelse
         </div>
 
-        <!-- Pagination -->
         @if ($products->hasPages())
             <div class="mt-5">
                 {{ $products->links('pagination::bootstrap-5') }}

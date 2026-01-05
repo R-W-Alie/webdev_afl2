@@ -1,9 +1,9 @@
-@extends('layout.admin')
+@extends('layout.main')
 
-@section('title', 'Edit Product')
+@section('title', 'Edit Product - KEL & CO')
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container py-5">
         <div class="mb-4">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
@@ -11,14 +11,15 @@
                     <li class="breadcrumb-item active" aria-current="page">Edit</li>
                 </ol>
             </nav>
-            <h1 class="display-6 fw-light text-uppercase mb-2 text-dark" style="letter-spacing: 0.15em;">
+            <h1 class="h3 text-uppercase fw-light mb-1" style="letter-spacing:0.2em; color:#2C2416;">
                 Edit Product
             </h1>
+            <div class="text-muted small" style="letter-spacing:0.05em;">Update product details and media</div>
         </div>
 
         <div class="row">
             <div class="col-lg-8">
-                <div class="card shadow-sm">
+                <div class="card shadow-sm" style="border:1px solid #D4C4B0;">
                     <div class="card-body p-4">
                         <form method="POST" action="{{ route('admin.products.update', $product) }}" enctype="multipart/form-data">
                             @csrf
@@ -62,10 +63,83 @@
                                     placeholder="0"
                                     style="border-color: #D4C4B0;">
                                 @error('price')
+                                                                <!-- category -->
+                                                                <div class="mb-4">
+                                                                    <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
+                                                                        Category <span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <select name="category_id" class="form-control @error('category_id') is-invalid @enderror" style="border-color: #D4C4B0;">
+                                                                        <option value="">Select a category</option>
+                                                                        @foreach(\App\Models\Category::all() as $cat)
+                                                                            <option value="{{ $cat->id }}" @selected(old('category_id', $product->category_id) == $cat->id)>{{ $cat->name }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                    @error('category_id')
+                                                                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                                    @enderror
+                                                                </div>
+
+                                                                <!-- stock quantity -->
+                                                                <div class="mb-4">
+                                                                    <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
+                                                                        Stock Quantity <span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <input type="number" name="stock_quantity" value="{{ old('stock_quantity', $product->stock_quantity) }}" 
+                                                                        class="form-control py-2 @error('stock_quantity') is-invalid @enderror" 
+                                                                        placeholder="0"
+                                                                        style="border-color: #D4C4B0;">
+                                                                    @error('stock_quantity')
+                                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                                    @enderror
+                                                                </div>
+
+                                                                <!-- featured -->
+                                                                <div class="mb-4 form-check">
+                                                                    <input type="checkbox" name="is_featured" value="1" class="form-check-input" 
+                                                                        id="isFeatured" @checked(old('is_featured', $product->is_featured))
+                                                                        style="border-color: #D4C4B0;">
+                                                                    <label class="form-check-label" for="isFeatured" style="color: #5C4D3C; letter-spacing: 0.05em;">
+                                                                        Mark as Featured
+                                                                    </label>
+                                                                </div>
+
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-
+                            <!-- size inven -->
+                            <div class="mb-4">
+                                <label class="form-label fw-normal" style="color: #5C4D3C; letter-spacing: 0.05em;">
+                                    Size Inventory
+                                </label>
+                                <div class="table-responsive">
+                                    <table class="table table-sm" style="border:1px solid #D4C4B0;">
+                                        <thead style="background:#F5F1E8;">
+                                            <tr>
+                                                <th style="color:#5C4D3C;">Size</th>
+                                                <th style="color:#5C4D3C;">Stock</th>
+                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach(['XS', 'S', 'M', 'L', 'XL', 'XXL'] as $size)
+                                                @php
+                                                    $productSize = $product->sizes->firstWhere('size', $size);
+                                                @endphp
+                                                <tr>
+                                                    <td class="py-2">{{ $size }}</td>
+                                                    <td class="py-2">
+                                                        <input type="number" name="sizes[{{ $size }}]" 
+                                                            value="{{ $productSize->stock ?? 0 }}" 
+                                                            class="form-control form-control-sm" 
+                                                            placeholder="0"
+                                                            style="border-color: #D4C4B0; max-width:100px;">
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <small class="text-muted">Update stock for each available size</small>
+                            </div>
                             <!-- img -->
                             @if($product->image)
                                 <div class="mb-4">
@@ -97,10 +171,10 @@
 
                             <!-- Buttons -->
                             <div class="d-flex gap-2 pt-3">
-                                <button type="submit" class="btn btn-primary-custom px-4">
+                                <button type="submit" class="btn btn-dark px-4" style="background:#2C2416; border-color:#2C2416; letter-spacing:0.05em;">
                                     <i class="fa-solid fa-check me-2"></i>Update Product
                                 </button>
-                                <a href="{{ route('admin.products.index') }}" class="btn btn-outline-custom px-4">
+                                <a href="{{ route('admin.products.index') }}" class="btn btn-outline-secondary px-4" style="border-color:#D4C4B0; color:#5C4D3C;">
                                     Cancel
                                 </a>
                             </div>
