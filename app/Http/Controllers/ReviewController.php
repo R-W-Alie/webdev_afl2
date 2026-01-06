@@ -47,11 +47,11 @@ class ReviewController extends Controller
             'user_id' => $user->id,
             'rating' => $validated['rating'],
             'comment' => $validated['comment'],
-            'is_approved' => false, // wait admin approval
+            'is_approved' => true, // auto-approve so visible immediately
         ]);
 
         return redirect()->route('products.show', $product->slug)
-            ->with('success', 'Review submitted successfully! It will appear after admin approval.');
+            ->with('success', 'Review posted successfully! Your review is now visible to everyone.');
     }
 
     public function adminIndex(Request $request)
