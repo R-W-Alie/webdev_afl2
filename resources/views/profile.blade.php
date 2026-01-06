@@ -135,9 +135,12 @@
                         </p>
 
                         <!-- actions -->
-                        <div class="d-flex justify-content-center gap-2 mt-2">
+                        <div class="d-flex justify-content-center gap-2 mt-2 flex-wrap">
                             <a href="{{ route('profile.edit') }}" class="edit-profile-btn">
                                 Edit Profile
+                            </a>
+                            <a href="{{ route('orders.history') }}" class="edit-profile-btn">
+                                My Orders
                             </a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
