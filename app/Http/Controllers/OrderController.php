@@ -40,7 +40,7 @@ class OrderController extends Controller
             abort(403, 'Unauthorized access');
         }
 
-        $order->load('items.product');
+        $order->load(['items.product', 'address']);
 
         return view('order-confirmation', compact('order'));
     }

@@ -9,6 +9,8 @@ use App\Models\CartItem;
 use App\Models\Address;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Stripe\Checkout\Session as StripeSession;
+use Stripe\Stripe;
 
 class CheckoutController extends Controller
 {
@@ -67,15 +69,51 @@ class CheckoutController extends Controller
                 'product_id' => $item->product_id,
                 'quantity' => $item->quantity,
                 'price' => $item->product->price,
+                'subtotal' => $item->product->price * $item->quantity,
             ]);
         }
 
         // Clear cart
         CartItem::where('user_id', $user->id)->delete();
 
-        // TODO: Redirect to Midtrans payment when ready
-        // For now, redirect to order confirmation
-        return redirect()->route('order.confirmation', $order->id)
-            ->with('success', 'Order created successfully! Proceed to payment.');
+        // Create Stripe Checkout Session (hosted payment page)
+        $stripeKey = config('services.stripe.secret') ?: env('STRIPE_SECRET');
+        if (empty($stripeKey)) {
+            return back()->with('error', 'Stripe secret key missing. Set STRIPE_SECRET in .env');
+        }
+        Stripe::setApiKey($stripeKey);
+
+        $lineItems = $cartItems->map(function ($item) {
+            return [
+                'price_data' => [
+                    'currency' => 'idr',
+                    'unit_amount' => (int) ($item->product->price * 100), // Stripe expects amount in cents
+                    'product_data' => [
+                        'name' => $item->product->name,
+                    ],
+                ],
+                'quantity' => $item->quantity,
+            ];
+        })->values()->all();
+
+        $session = StripeSession::create([
+            'mode' => 'payment',
+            'payment_method_types' => ['card'],
+            'customer_email' => $user->email,
+            'line_items' => $lineItems,
+            'success_url' => route('order.confirmation', $order->id) . '?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url' => route('cart.index'),
+            'metadata' => [
+                'order_id' => $order->id,
+                'order_number' => $order->order_number,
+            ],
+        ]);
+
+        $order->update([
+            'payment_session_id' => $session->id,
+            'payment_status' => 'pending',
+        ]);
+
+        return redirect($session->url);
     }
 }

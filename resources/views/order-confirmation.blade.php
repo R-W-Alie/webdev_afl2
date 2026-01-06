@@ -46,6 +46,22 @@
                     </div>
 
                     <div class="mb-3 pb-3" style="border-bottom:1px solid #E8DCC8;">
+                        <div class="small text-muted mb-1">Payment Status</div>
+                        @php $pay = $order->payment_status ?? 'pending'; @endphp
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="badge"
+                                  style="background: {{ $pay === 'paid' ? '#198754' : ($pay === 'pending' ? '#FFC107' : '#6C757D') }}; color: #fff;">
+                                {{ ucfirst($pay) }}
+                            </span>
+                            @if($pay === 'paid' && $order->paid_at)
+                                <span class="small text-muted">Paid {{ $order->paid_at->format('M d, Y H:i') }}</span>
+                            @elseif($pay !== 'paid')
+                                <span class="small text-muted">Awaiting payment confirmation</span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="mb-3 pb-3" style="border-bottom:1px solid #E8DCC8;">
                         <div class="small text-muted mb-1">Shipping Address</div>
                         <div style="color:#2C2416;">
                             {{ $order->address->address_line1 }}
@@ -92,7 +108,7 @@
                     What's Next?
                 </h6>
                 <ul class="small text-muted ps-3 mb-0">
-                    <li>We're processing your payment</li>
+                    <li>{{ ($order->payment_status ?? 'pending') === 'paid' ? "Payment received" : "Payment pending" }}</li>
                     <li>You'll receive an order confirmation email shortly</li>
                     <li>Track your order status in your <a href="{{ route('orders.history') }}" class="text-decoration-none" style="color:#8B7355;">order history</a></li>
                 </ul>
