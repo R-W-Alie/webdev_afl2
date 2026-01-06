@@ -44,16 +44,16 @@ class CheckoutController extends Controller
             'notes' => 'nullable|string|max:500',
         ]);
 
-        // Verify address belongs to user
+        // verify address 
         $address = Address::findOrFail($validated['address_id']);
         if ($address->user_id !== $user->id) {
             return back()->with('error', 'Invalid address selected');
         }
 
-        // Calculate total
+        // calculate total
         $total = $cartItems->sum(fn($item) => $item->product->price * $item->quantity);
 
-        // Create order
+        // create order
         $order = Order::create([
             'user_id' => $user->id,
             'address_id' => $validated['address_id'],
@@ -62,7 +62,7 @@ class CheckoutController extends Controller
             'notes' => $validated['notes'] ?? null,
         ]);
 
-        // Create order items from cart
+        // create order items
         foreach ($cartItems as $item) {
             OrderItem::create([
                 'order_id' => $order->id,
@@ -73,10 +73,10 @@ class CheckoutController extends Controller
             ]);
         }
 
-        // Clear cart
+        // clear cart
         CartItem::where('user_id', $user->id)->delete();
 
-        // Create Stripe Checkout Session (hosted payment page)
+        // PAYMENT GATEWAYNYA
         $stripeKey = config('services.stripe.secret') ?: env('STRIPE_SECRET');
         if (empty($stripeKey)) {
             return back()->with('error', 'Stripe secret key missing. Set STRIPE_SECRET in .env');
